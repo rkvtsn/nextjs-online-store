@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
+import { Header } from "@/components/shared/Header";
 import "./globals.css";
 
 const nunitoFont = Nunito({
@@ -16,7 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${nunitoFont.variable} antialiased`}>
-        <main className="min-h-screen">{children}</main>
+        <main className="min-h-screen">
+          <Header />
+          {children}
+        </main>
       </body>
     </html>
   );

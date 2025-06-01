@@ -1,7 +1,14 @@
-import { Button } from "@/components/ui/button";
+import { Heading } from "@/components/shared/Heading";
+import { Panel } from "@/components/shared/Panel";
 
 export default function Home() {
-  return <div>
-    <Button variant="outline">Hello World Button</Button>
-  </div>;
+  return (
+    <>
+      <Panel className="mt-10">
+        <Heading size="lg" className="font-extrabold">
+          All products
+        </Heading>
+      </Panel>
+    </>
+  );
 }
