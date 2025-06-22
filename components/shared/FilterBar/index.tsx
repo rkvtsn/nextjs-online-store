@@ -2,7 +2,7 @@ import React from "react";
 import { PropsWithClassName } from "../types";
 import { cn } from "@/lib/utils";
 import { Panel } from "../Panel";
-import { CategoryFilter } from "../CategoryFilter";
+import { Categories } from "../Categories";
 import { SortFilter } from "../SortFilter";
 
 export const FilterBar = ({ className }: PropsWithClassName) => {
@@ -14,7 +14,7 @@ export const FilterBar = ({ className }: PropsWithClassName) => {
       )}
     >
       <Panel className="flex items-center justify-between">
-        <CategoryFilter />
+        <Categories />
         <SortFilter />
       </Panel>
     </div>
