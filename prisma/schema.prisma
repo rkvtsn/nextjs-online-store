@@ -10,19 +10,124 @@ generator client {
     output   = "../app/generated/prisma-client"
 }
 
+enum OrderStatus {
+    PENDING
+    SUCCESS
+    CANCELED
+}
+
+enum UserType {
+    ADMIN
+    USER
+}
+
 model User {
-    id        Int      @id @default(autoincrement())
-    name      String
-    email     String   @unique
-    password  String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    id           String        @id @default(cuid())
+    name         String
+    email        String        @unique
+    password     String
+    verified     DateTime
+    link         String?
+    linkType     String?
+    userType     UserType      @default(USER)
+    createdAt    DateTime      @default(now())
+    updatedAt    DateTime      @updatedAt
+    order        Order[]
+    verification Verification?
+    cart         Cart?
+}
+
+model Cart {
+    id          String     @id @default(cuid())
+    user        User?      @relation(fields: [userId], references: [id])
+    userId      String?    @unique
+    totalAmount Float      @default(0)
+    sessionId   String
+    purchases   Purchase[]
+    createdAt   DateTime   @default(now())
+    updatedAt   DateTime   @updatedAt
+}
+
+model Order {
+    id          String      @id @default(cuid())
+    user        User?       @relation(fields: [userId], references: [id])
+    userId      String?
+    paymentId   String?
+    sessionId   String
+    status      OrderStatus
+    purchases   Purchase[]
+    totalAmount Float
+    address     String
+    name        String
+    phone       String
+    email       String
+    comment     String?
+    createdAt   DateTime    @default(now())
+    updatedAt   DateTime    @updatedAt
+}
+
+model Purchase {
+    id          String    @id @default(cuid())
+    variant     Variant   @relation(fields: [variantId], references: [id])
+    variantId   String
+    cart        Cart      @relation(fields: [cartId], references: [id])
+    cartId      String
+    features    Feature[]
+    order       Order?    @relation(fields: [orderId], references: [id])
+    orderId     String?
+    quantity    Int
+    // we have to save original info
+    price       Float
+    productName String
+    variantName String
+}
+
+model Category {
+    id      Int       @id @default(autoincrement())
+    name    String    @unique
+    product Product[]
+}
+
+model Feature {
+    id         String    @id @default(cuid())
+    products   Product[] @relation(name: "FeatureToProduct")
+    name       String
+    price      Float?
+    imageUrl   String?
+    createdAt  DateTime  @default(now())
+    updatedAt  DateTime  @updatedAt
+    purchase   Purchase? @relation(fields: [purchaseId], references: [id])
+    purchaseId String?
 }
 
 model Product {
-    id        Int      @id @default(autoincrement())
-    name      String
-    imageUrl  String
+    id         String    @id @default(cuid())
+    categoryId Int
+    category   Category  @relation(fields: [categoryId], references: [id])
+    features   Feature[] @relation(name: "FeatureToProduct")
+    variants   Variant[]
+    name       String
+    imageUrl   String
+    createdAt  DateTime  @default(now())
+    updatedAt  DateTime  @updatedAt
+}
+
+model Variant {
+    id          String     @id @default(cuid())
+    product     Product    @relation(fields: [productId], references: [id])
+    productId   String
+    purchases   Purchase[]
+    name        String
+    price       Float
+    description String?
+}
+
+model Verification {
+    id        String   @id @default(cuid())
+    user      User     @relation(fields: [userId], references: [id])
+    userId    String   @unique
+    value     String   @unique
     createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+
+    @@unique([userId, value])
 }

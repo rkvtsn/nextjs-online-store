@@ -1,7 +1,9 @@
 import { create } from "zustand";
-import { CATEGORIES } from "./constants";
 
-export type CategoryType = (typeof CATEGORIES)[number];
+export type CategoryType = {
+  id: number;
+  name: string;
+};
 export type CategoryId = CategoryType["id"];
 
 export type StateCategory = {

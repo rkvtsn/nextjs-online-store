@@ -125,16 +125,87 @@ exports.Prisma.UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   password: 'password',
+  verified: 'verified',
+  link: 'link',
+  linkType: 'linkType',
+  userType: 'userType',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.CartScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  totalAmount: 'totalAmount',
+  sessionId: 'sessionId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OrderScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  paymentId: 'paymentId',
+  sessionId: 'sessionId',
+  status: 'status',
+  totalAmount: 'totalAmount',
+  address: 'address',
+  name: 'name',
+  phone: 'phone',
+  email: 'email',
+  comment: 'comment',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PurchaseScalarFieldEnum = {
+  id: 'id',
+  variantId: 'variantId',
+  cartId: 'cartId',
+  orderId: 'orderId',
+  quantity: 'quantity',
+  price: 'price',
+  productName: 'productName',
+  variantName: 'variantName'
+};
+
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.FeatureScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  price: 'price',
+  imageUrl: 'imageUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  purchaseId: 'purchaseId'
+};
+
 exports.Prisma.ProductScalarFieldEnum = {
   id: 'id',
+  categoryId: 'categoryId',
   name: 'name',
   imageUrl: 'imageUrl',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.VariantScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  name: 'name',
+  price: 'price',
+  description: 'description'
+};
+
+exports.Prisma.VerificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  value: 'value',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -147,10 +218,31 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+exports.UserType = exports.$Enums.UserType = {
+  ADMIN: 'ADMIN',
+  USER: 'USER'
+};
+
+exports.OrderStatus = exports.$Enums.OrderStatus = {
+  PENDING: 'PENDING',
+  SUCCESS: 'SUCCESS',
+  CANCELED: 'CANCELED'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Product: 'Product'
+  Cart: 'Cart',
+  Order: 'Order',
+  Purchase: 'Purchase',
+  Category: 'Category',
+  Feature: 'Feature',
+  Product: 'Product',
+  Variant: 'Variant',
+  Verification: 'Verification'
 };
 
 /**
