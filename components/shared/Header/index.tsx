@@ -1,9 +1,9 @@
-import { cn } from "@/lib/utils";
-import { PropsWithClassName } from "../types";
 import Image from "next/image";
-import { Panel } from "../Panel";
-import { Button } from "@/components/ui/button";
 import { ArrowRight, ShoppingCart, User } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Panel } from "@/components/common/Panel";
+import { PropsWithClassName } from "@/lib/types";
 
 export const Header = ({ className }: PropsWithClassName) => {
   return (

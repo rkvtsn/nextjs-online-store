@@ -1,11 +1,11 @@
 import React from "react";
-import { PropsWithClassName } from "../types";
 import { cn } from "@/lib/utils";
-import { Heading } from "../Heading";
 import { Input } from "@/components/ui/input";
-import { RangeSlider } from "../RangeSlider";
-import { FilterCheckbox } from "../FilterCheckbox";
-import { CheckboxGroup } from "../CheckboxGroup";
+import { Heading } from "@/components/common/Heading";
+import { CheckboxWithLabel } from "@/components/common/CheckboxWithLabel";
+import { CheckboxGroup } from "@/components/common/CheckboxGroup";
+import { RangeSlider } from "@/components/common/RangeSlider";
+import { PropsWithClassName } from "@/lib/types";
 
 export const PRODUCT_PROPERTIES = [
   { value: "organic", label: "Organic" },
@@ -32,8 +32,8 @@ export const SideFilters = ({ className }: PropsWithClassName) => {
         Filters:
       </Heading>
       <div className="flex flex-col gap-4">
-        <FilterCheckbox label="New" value="1" />
-        <FilterCheckbox label="Fresh" value="2" />
+        <CheckboxWithLabel label="New" value="1" />
+        <CheckboxWithLabel label="Fresh" value="2" />
       </div>
 
       <div className="mt-3 border-y border-y-neutral-100 py-6 pb-7">

@@ -1,8 +1,8 @@
+import { Panel } from "@/components/common/Panel";
 import { FilterBar } from "@/components/shared/FilterBar";
-import { Heading } from "@/components/shared/Heading";
-import { Panel } from "@/components/shared/Panel";
 import { ProductsGroup } from "@/components/shared/ProductsGroup";
 import { SideFilters } from "@/components/shared/SideFilters";
+import { Heading } from "lucide-react";
 
 export default function Home() {
   return (

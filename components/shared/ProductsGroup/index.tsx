@@ -2,14 +2,14 @@
 
 import { ComponentProps, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
-import { ProductCard } from "../ProductCard";
-import { Heading } from "../Heading";
-import { PropsWithClassName } from "../types";
-import useIntersection from "../hooks/useIntersection";
 import { CategoryId, useStoreCategory } from "@/store/category";
+import { Heading } from "@/components/common/Heading";
+import useIntersection from "@/lib/hooks/useIntersection";
+import { ProductCard } from "../ProductCard";
+import { PropsWithClassName } from "@/lib/types";
 
 export const ProductsGroup = (props: ProductsGroupProps) => {
-  const { products, className, listClassName, categoryId } = props;
+  const { products, className, classNameProducts, categoryId } = props;
   const intersectionRef = useRef<HTMLDivElement>(null);
   const intersection = useIntersection(intersectionRef, {
     threshold: 0.4,
@@ -32,7 +32,7 @@ export const ProductsGroup = (props: ProductsGroupProps) => {
         {[].find(({ id }) => id === categoryId)?.name}
       </Heading>
 
-      <div className={cn("grid grid-cols-3 gap-[50px]", listClassName)}>
+      <div className={cn("grid grid-cols-3 gap-[50px]", classNameProducts)}>
         {products.map((product) => (
           <ProductCard key={product.id} {...product} />
         ))}
@@ -44,5 +44,5 @@ export const ProductsGroup = (props: ProductsGroupProps) => {
 type ProductsGroupProps = PropsWithClassName & {
   products: ComponentProps<typeof ProductCard>[];
   categoryId: CategoryId;
-  listClassName?: PropsWithClassName["className"];
+  classNameProducts?: PropsWithClassName["className"];
 };

@@ -1,7 +1,7 @@
 import React from "react";
-import { PropsWithClassName } from "../types";
 import { cn } from "@/lib/utils";
-import { Panel } from "../Panel";
+import { Panel } from "@/components/common/Panel";
+import { PropsWithClassName } from "@/lib/types";
 import { Categories } from "../Categories";
 import { SortFilter } from "../SortFilter";
 

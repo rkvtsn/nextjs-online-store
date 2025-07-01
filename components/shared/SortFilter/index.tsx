@@ -1,7 +1,7 @@
 import React from "react";
-import { PropsWithClassName } from "../types";
-import { cn } from "@/lib/utils";
 import { ArrowUpDown } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { PropsWithClassName } from "@/lib/types";
 
 export const SortFilter = ({ className }: PropsWithClassName) => {
   return (

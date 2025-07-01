@@ -5,16 +5,6 @@ import * as SliderPrimitive from "@radix-ui/react-slider";
 
 import { cn } from "@/lib/utils";
 
-type SliderProps = {
-  className?: string;
-  min: number;
-  max: number;
-  step: number;
-  formatLabel?: (value: number) => string;
-  value?: number[] | readonly number[];
-  onValueChange?: (values: number[]) => void;
-};
-
 const RangeSlider = React.forwardRef(
   (
     {
@@ -84,3 +74,13 @@ const RangeSlider = React.forwardRef(
 RangeSlider.displayName = SliderPrimitive.Root.displayName;
 
 export { RangeSlider };
+
+type SliderProps = {
+  className?: string;
+  min: number;
+  max: number;
+  step: number;
+  formatLabel?: (value: number) => string;
+  value?: number[] | readonly number[];
+  onValueChange?: (values: number[]) => void;
+};

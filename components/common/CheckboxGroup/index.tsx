@@ -6,22 +6,10 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { PropsWithClassName } from "@/components/shared/types";
 import { cn } from "@/lib/utils";
-import { FilterCheckbox } from "../FilterCheckbox";
+import { PropsWithClassName } from "@/lib/types";
 import { Input } from "@/components/ui/input";
-
-type CheckboxGroupItem = ComponentProps<typeof FilterCheckbox>;
-
-type CheckboxGroupProps = PropsWithClassName & {
-  title: string;
-  items: CheckboxGroupItem[];
-  defaultItems?: CheckboxGroupItem[];
-  limit?: number;
-  placeholder?: string;
-  onChange?: (values: string[]) => void;
-  defaultValue?: string[];
-};
+import { CheckboxWithLabel } from "../CheckboxWithLabel";
 
 export const CheckboxGroup = (props: CheckboxGroupProps) => {
   const {
@@ -29,8 +17,8 @@ export const CheckboxGroup = (props: CheckboxGroupProps) => {
     items,
     title,
     defaultItems = items,
-    defaultValue,
-    onChange,
+    // defaultValue,
+    // onChange,
     limit = 5,
     placeholder = "Search",
   } = props;
@@ -60,7 +48,7 @@ export const CheckboxGroup = (props: CheckboxGroupProps) => {
 
   const handleOnCheck = () => {
     // onChange
-  }
+  };
 
   return (
     <div className={cn(className)}>
@@ -79,7 +67,7 @@ export const CheckboxGroup = (props: CheckboxGroupProps) => {
 
       <div className="flex flex-col gap-4 max-h-96 pr-2 overflow-auto scroll-auto">
         {filteredItems.map((itemProps) => (
-          <FilterCheckbox
+          <CheckboxWithLabel
             key={itemProps.label}
             {...itemProps}
             onCheck={handleOnCheck}
@@ -95,4 +83,16 @@ export const CheckboxGroup = (props: CheckboxGroupProps) => {
       )}
     </div>
   );
+};
+
+type CheckboxGroupItem = ComponentProps<typeof CheckboxWithLabel>;
+
+type CheckboxGroupProps = PropsWithClassName & {
+  title: string;
+  items: CheckboxGroupItem[];
+  defaultItems?: CheckboxGroupItem[];
+  limit?: number;
+  placeholder?: string;
+  onChange?: (values: string[]) => void;
+  defaultValue?: string[];
 };

@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { PropsWithClassName } from "../types";
 import { cn } from "@/lib/utils";
 import { useStoreCategory } from "@/store/category";
+import { PropsWithClassName } from "@/lib/types";
 
 export const Categories = ({ className }: PropsWithClassName) => {
   const activeCategoryId = useStoreCategory((state) => state.activeId);
