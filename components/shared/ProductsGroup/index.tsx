@@ -6,7 +6,6 @@ import { ProductCard } from "../ProductCard";
 import { Heading } from "../Heading";
 import { PropsWithClassName } from "../types";
 import useIntersection from "../hooks/useIntersection";
-import { CATEGORIES } from "@/store/constants";
 import { CategoryId, useStoreCategory } from "@/store/category";
 
 export const ProductsGroup = (props: ProductsGroupProps) => {
@@ -30,7 +29,7 @@ export const ProductsGroup = (props: ProductsGroupProps) => {
       ref={intersectionRef}
     >
       <Heading size="lg" className="font-extrabold mb-5">
-        {CATEGORIES.find(({ id }) => id === categoryId)?.name}
+        {[].find(({ id }) => id === categoryId)?.name}
       </Heading>
 
       <div className={cn("grid grid-cols-3 gap-[50px]", listClassName)}>

@@ -10080,6 +10080,7 @@ export namespace Prisma {
 
   export type VariantMinAggregateOutputType = {
     id: string | null
+    sku: string | null
     productId: string | null
     name: string | null
     price: number | null
@@ -10088,6 +10089,7 @@ export namespace Prisma {
 
   export type VariantMaxAggregateOutputType = {
     id: string | null
+    sku: string | null
     productId: string | null
     name: string | null
     price: number | null
@@ -10096,6 +10098,7 @@ export namespace Prisma {
 
   export type VariantCountAggregateOutputType = {
     id: number
+    sku: number
     productId: number
     name: number
     price: number
@@ -10114,6 +10117,7 @@ export namespace Prisma {
 
   export type VariantMinAggregateInputType = {
     id?: true
+    sku?: true
     productId?: true
     name?: true
     price?: true
@@ -10122,6 +10126,7 @@ export namespace Prisma {
 
   export type VariantMaxAggregateInputType = {
     id?: true
+    sku?: true
     productId?: true
     name?: true
     price?: true
@@ -10130,6 +10135,7 @@ export namespace Prisma {
 
   export type VariantCountAggregateInputType = {
     id?: true
+    sku?: true
     productId?: true
     name?: true
     price?: true
@@ -10225,6 +10231,7 @@ export namespace Prisma {
 
   export type VariantGroupByOutputType = {
     id: string
+    sku: string
     productId: string
     name: string
     price: number
@@ -10252,6 +10259,7 @@ export namespace Prisma {
 
   export type VariantSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    sku?: boolean
     productId?: boolean
     name?: boolean
     price?: boolean
@@ -10263,6 +10271,7 @@ export namespace Prisma {
 
   export type VariantSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    sku?: boolean
     productId?: boolean
     name?: boolean
     price?: boolean
@@ -10272,6 +10281,7 @@ export namespace Prisma {
 
   export type VariantSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    sku?: boolean
     productId?: boolean
     name?: boolean
     price?: boolean
@@ -10281,13 +10291,14 @@ export namespace Prisma {
 
   export type VariantSelectScalar = {
     id?: boolean
+    sku?: boolean
     productId?: boolean
     name?: boolean
     price?: boolean
     description?: boolean
   }
 
-  export type VariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "name" | "price" | "description", ExtArgs["result"]["variant"]>
+  export type VariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sku" | "productId" | "name" | "price" | "description", ExtArgs["result"]["variant"]>
   export type VariantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     product?: boolean | ProductDefaultArgs<ExtArgs>
     purchases?: boolean | Variant$purchasesArgs<ExtArgs>
@@ -10308,6 +10319,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      sku: string
       productId: string
       name: string
       price: number
@@ -10738,6 +10750,7 @@ export namespace Prisma {
    */
   interface VariantFieldRefs {
     readonly id: FieldRef<"Variant", 'String'>
+    readonly sku: FieldRef<"Variant", 'String'>
     readonly productId: FieldRef<"Variant", 'String'>
     readonly name: FieldRef<"Variant", 'String'>
     readonly price: FieldRef<"Variant", 'Float'>
@@ -12335,6 +12348,7 @@ export namespace Prisma {
 
   export const VariantScalarFieldEnum: {
     id: 'id',
+    sku: 'sku',
     productId: 'productId',
     name: 'name',
     price: 'price',
@@ -12987,6 +13001,7 @@ export namespace Prisma {
     OR?: VariantWhereInput[]
     NOT?: VariantWhereInput | VariantWhereInput[]
     id?: StringFilter<"Variant"> | string
+    sku?: StringFilter<"Variant"> | string
     productId?: StringFilter<"Variant"> | string
     name?: StringFilter<"Variant"> | string
     price?: FloatFilter<"Variant"> | number
@@ -12997,6 +13012,7 @@ export namespace Prisma {
 
   export type VariantOrderByWithRelationInput = {
     id?: SortOrder
+    sku?: SortOrder
     productId?: SortOrder
     name?: SortOrder
     price?: SortOrder
@@ -13010,6 +13026,7 @@ export namespace Prisma {
     AND?: VariantWhereInput | VariantWhereInput[]
     OR?: VariantWhereInput[]
     NOT?: VariantWhereInput | VariantWhereInput[]
+    sku?: StringFilter<"Variant"> | string
     productId?: StringFilter<"Variant"> | string
     name?: StringFilter<"Variant"> | string
     price?: FloatFilter<"Variant"> | number
@@ -13020,6 +13037,7 @@ export namespace Prisma {
 
   export type VariantOrderByWithAggregationInput = {
     id?: SortOrder
+    sku?: SortOrder
     productId?: SortOrder
     name?: SortOrder
     price?: SortOrder
@@ -13036,6 +13054,7 @@ export namespace Prisma {
     OR?: VariantScalarWhereWithAggregatesInput[]
     NOT?: VariantScalarWhereWithAggregatesInput | VariantScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Variant"> | string
+    sku?: StringWithAggregatesFilter<"Variant"> | string
     productId?: StringWithAggregatesFilter<"Variant"> | string
     name?: StringWithAggregatesFilter<"Variant"> | string
     price?: FloatWithAggregatesFilter<"Variant"> | number
@@ -13636,6 +13655,7 @@ export namespace Prisma {
 
   export type VariantCreateInput = {
     id?: string
+    sku: string
     name: string
     price: number
     description?: string | null
@@ -13645,6 +13665,7 @@ export namespace Prisma {
 
   export type VariantUncheckedCreateInput = {
     id?: string
+    sku: string
     productId: string
     name: string
     price: number
@@ -13654,6 +13675,7 @@ export namespace Prisma {
 
   export type VariantUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13663,6 +13685,7 @@ export namespace Prisma {
 
   export type VariantUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
     productId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
@@ -13672,6 +13695,7 @@ export namespace Prisma {
 
   export type VariantCreateManyInput = {
     id?: string
+    sku: string
     productId: string
     name: string
     price: number
@@ -13680,6 +13704,7 @@ export namespace Prisma {
 
   export type VariantUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13687,6 +13712,7 @@ export namespace Prisma {
 
   export type VariantUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
     productId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
@@ -14318,6 +14344,7 @@ export namespace Prisma {
 
   export type VariantCountOrderByAggregateInput = {
     id?: SortOrder
+    sku?: SortOrder
     productId?: SortOrder
     name?: SortOrder
     price?: SortOrder
@@ -14330,6 +14357,7 @@ export namespace Prisma {
 
   export type VariantMaxOrderByAggregateInput = {
     id?: SortOrder
+    sku?: SortOrder
     productId?: SortOrder
     name?: SortOrder
     price?: SortOrder
@@ -14338,6 +14366,7 @@ export namespace Prisma {
 
   export type VariantMinOrderByAggregateInput = {
     id?: SortOrder
+    sku?: SortOrder
     productId?: SortOrder
     name?: SortOrder
     price?: SortOrder
@@ -15637,6 +15666,7 @@ export namespace Prisma {
 
   export type VariantCreateWithoutPurchasesInput = {
     id?: string
+    sku: string
     name: string
     price: number
     description?: string | null
@@ -15645,6 +15675,7 @@ export namespace Prisma {
 
   export type VariantUncheckedCreateWithoutPurchasesInput = {
     id?: string
+    sku: string
     productId: string
     name: string
     price: number
@@ -15759,6 +15790,7 @@ export namespace Prisma {
 
   export type VariantUpdateWithoutPurchasesInput = {
     id?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -15767,6 +15799,7 @@ export namespace Prisma {
 
   export type VariantUncheckedUpdateWithoutPurchasesInput = {
     id?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
     productId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
@@ -16074,6 +16107,7 @@ export namespace Prisma {
 
   export type VariantCreateWithoutProductInput = {
     id?: string
+    sku: string
     name: string
     price: number
     description?: string | null
@@ -16082,6 +16116,7 @@ export namespace Prisma {
 
   export type VariantUncheckedCreateWithoutProductInput = {
     id?: string
+    sku: string
     name: string
     price: number
     description?: string | null
@@ -16155,6 +16190,7 @@ export namespace Prisma {
     OR?: VariantScalarWhereInput[]
     NOT?: VariantScalarWhereInput | VariantScalarWhereInput[]
     id?: StringFilter<"Variant"> | string
+    sku?: StringFilter<"Variant"> | string
     productId?: StringFilter<"Variant"> | string
     name?: StringFilter<"Variant"> | string
     price?: FloatFilter<"Variant"> | number
@@ -16592,6 +16628,7 @@ export namespace Prisma {
 
   export type VariantCreateManyProductInput = {
     id?: string
+    sku: string
     name: string
     price: number
     description?: string | null
@@ -16629,6 +16666,7 @@ export namespace Prisma {
 
   export type VariantUpdateWithoutProductInput = {
     id?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16637,6 +16675,7 @@ export namespace Prisma {
 
   export type VariantUncheckedUpdateWithoutProductInput = {
     id?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16645,6 +16684,7 @@ export namespace Prisma {
 
   export type VariantUncheckedUpdateManyWithoutProductInput = {
     id?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null

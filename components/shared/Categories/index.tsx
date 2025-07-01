@@ -3,7 +3,6 @@
 import React from "react";
 import { PropsWithClassName } from "../types";
 import { cn } from "@/lib/utils";
-import { CATEGORIES } from "@/store/constants";
 import { useStoreCategory } from "@/store/category";
 
 export const Categories = ({ className }: PropsWithClassName) => {
@@ -15,7 +14,7 @@ export const Categories = ({ className }: PropsWithClassName) => {
         className
       )}
     >
-      {CATEGORIES.map((category) => (
+      {[].map((category) => (
         <a
           className={cn(
             "px-2 flex items-center font-bold h-8 rounded-2xl",

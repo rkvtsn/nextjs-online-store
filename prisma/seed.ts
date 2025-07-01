@@ -2,13 +2,15 @@ import { prisma } from "../lib/prisma";
 import { hashSync } from "bcrypt";
 import { CATEGORIES } from "./constants/categories";
 import { FEATURES } from "./constants/features";
+import { PRODUCTS } from "./constants/products";
+import { PRODUCTS_KITCHEN } from "./constants/products_kitchen";
 
 const onDrop = async () => {
-  await prisma.user.deleteMany({ where: {} });
-
+  await prisma.variant.deleteMany({ where: {} });
+  await prisma.product.deleteMany({ where: {} });
   await prisma.category.deleteMany({ where: {} });
-
   await prisma.feature.deleteMany({ where: {} });
+  await prisma.user.deleteMany({ where: {} });
 };
 
 const onCreate = async () => {
@@ -39,7 +41,40 @@ const onCreate = async () => {
     data: FEATURES,
   });
 
-  
+  await prisma.product.createMany({
+    data: PRODUCTS,
+  });
+
+  await prisma.feature.createMany({ data: FEATURES, skipDuplicates: true });
+  const features = await prisma.feature.findMany();
+  const featuresMap = Object.fromEntries(features.map((f) => [f.name, f.id]));
+
+  for (const product of PRODUCTS_KITCHEN) {
+    const { id } = await prisma.product.create({
+      data: {
+        name: product.name,
+        imageUrl: product.imageUrl,
+        categoryId: product.categoryId,
+        features: {
+          connect: product.features.map((name) => ({
+            id: featuresMap[name],
+          })),
+        },
+      },
+    });
+
+    for (const variant of product.variants) {
+      await prisma.variant.create({
+        data: {
+          name: variant.name,
+          sku: variant.sku,
+          price: variant.price,
+          description: variant.description,
+          productId: id,
+        },
+      });
+    }
+  }
 };
 
 const main = async () => {
