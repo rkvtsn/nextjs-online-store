@@ -1,7 +1,7 @@
 import { Panel } from "@/components/common/Panel";
 import { FilterBar } from "@/components/shared/FilterBar";
 import { ProductsGroup } from "@/components/shared/ProductsGroup";
-import { SideFilters } from "@/components/shared/SideFilters";
+import { ProductsFilter } from "@/components/shared/ProductsFilter";
 import { Heading } from "lucide-react";
 
 export default function Home() {
@@ -16,7 +16,7 @@ export default function Home() {
         <Panel className="mt-10 pb-14">
           <div className="gap-[60px] flex">
             <div className="w-[250px]">
-              <SideFilters />
+              <ProductsFilter />
             </div>
 
             <div className="flex-1">

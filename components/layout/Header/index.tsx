@@ -4,17 +4,24 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Panel } from "@/components/common/Panel";
 import { PropsWithClassName } from "@/lib/types";
+import Link from "next/link";
+import { ProductsSearch } from "@/components/shared/ProductsSearch";
 
 export const Header = ({ className }: PropsWithClassName) => {
   return (
     <header className={cn("header border border-b", className)}>
       <Panel className="flex items-center justify-between py-8">
-        <div className="flex items-center gap-4">
-          <Image src="/logo.png" alt="Logo" width={35} height={35} />
-          <div>
-            <h1 className="uppercase font-black text-2xl">super store</h1>
-            <p className="text-gray-400 text-sm">always best and with you</p>
+        <Link href="/">
+          <div className="flex items-center gap-4">
+            <Image src="/logo.png" alt="Logo" width={35} height={35} />
+            <div>
+              <h1 className="uppercase font-black text-2xl">super store</h1>
+              <p className="text-gray-400 text-sm">always best and with you</p>
+            </div>
           </div>
+        </Link>
+        <div className="mx-10 flex-1">
+          <ProductsSearch />
         </div>
         <div className="flex items-center gap-3">
           <Button variant="outline" className="gap-3 flex items-center">

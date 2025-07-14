@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 import { cn } from "@/lib/utils";
-import { PropsWithClassName } from "@/components/shared/types";
+import { PropsWithClassName } from "@/lib/types";
 
 export const Panel = ({
   className,

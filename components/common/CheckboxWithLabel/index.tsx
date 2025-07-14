@@ -12,10 +12,15 @@ export const CheckboxWithLabel = ({
   className,
 }: CheckboxWithLabelProps) => {
   const id = `checkbox-${value}`;
+
+  const handleOnCheck = (checked: boolean) => {
+    onCheck?.(checked, value);
+  };
+
   return (
     <div className={cn("flex items-center space-x-2", className)}>
       <Checkbox
-        onCheckedChange={onCheck}
+        onCheckedChange={handleOnCheck}
         value={value}
         checked={checked}
         id={id}
@@ -29,10 +34,10 @@ export const CheckboxWithLabel = ({
   );
 };
 
-type CheckboxWithLabelProps = PropsWithChildren &
+type CheckboxWithLabelProps<V = string> = PropsWithChildren &
   PropsWithClassName & {
     label: string;
-    value: string;
-    onCheck?: (checked: boolean) => void;
+    value: V;
+    onCheck?: (checked: boolean, value: V) => void;
     checked?: boolean;
   };

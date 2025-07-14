@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { Panel } from "@/components/common/Panel";
 import { PropsWithClassName } from "@/lib/types";
 import { Categories } from "../Categories";
-import { SortFilter } from "../SortFilter";
+import { ProductsSort } from "../ProductsSort";
 
 export const FilterBar = ({ className }: PropsWithClassName) => {
   return (
@@ -15,7 +15,7 @@ export const FilterBar = ({ className }: PropsWithClassName) => {
     >
       <Panel className="flex items-center justify-between">
         <Categories />
-        <SortFilter />
+        <ProductsSort />
       </Panel>
     </div>
   );

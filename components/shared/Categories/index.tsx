@@ -1,12 +1,24 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { useStoreCategory } from "@/store/category";
 import { PropsWithClassName } from "@/lib/types";
+import { Category } from "@/app/generated/prisma-client";
+import { serviceCategories } from "@/services/serviceCategories";
 
 export const Categories = ({ className }: PropsWithClassName) => {
   const activeCategoryId = useStoreCategory((state) => state.activeId);
+
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    serviceCategories
+      .getAll()
+      .then(setCategories)
+      .catch(() => setCategories([]));
+  }, []);
+
   return (
     <div
       className={cn(
@@ -14,7 +26,7 @@ export const Categories = ({ className }: PropsWithClassName) => {
         className
       )}
     >
-      {[].map((category) => (
+      {categories.map((category) => (
         <a
           className={cn(
             "px-2 flex items-center font-bold h-8 rounded-2xl",
