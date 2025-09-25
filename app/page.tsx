@@ -12,6 +12,7 @@ export default async function Home() {
   let categories: CategoryWithProductsModel[] = [];
   try {
     categories = await serviceCategories.getWithProducts();
+    console.log({ categories });
   } catch (e) {
     console.log(e);
   }
