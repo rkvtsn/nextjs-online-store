@@ -10,11 +10,13 @@ export const dynamic = "force-dynamic";
 
 export default async function Home() {
   let categories: CategoryWithProductsModel[] = [];
+
   try {
+    console.error("Home page: fetching categories...");
     categories = await serviceCategories.getWithProducts();
-    console.log({ categories });
+    console.error("Home page: fetched categories:", JSON.stringify(categories, null, 2));
   } catch (e) {
-    console.log(e);
+    console.error("Home page: error fetching categories:", e);
   }
 
   return (
@@ -33,6 +35,12 @@ export default async function Home() {
 
             <div className="flex-1">
               <div className="flex flex-col gap-16">
+                {categories.length === 0 && (
+                  <div style={{ color: "red" }}>
+                    Categories array is empty. Check logs.
+                  </div>
+                )}
+
                 {categories.map((category) => (
                   <ProductsGroup
                     key={category.id}
@@ -44,6 +52,11 @@ export default async function Home() {
             </div>
           </div>
         </Panel>
+
+        <div style={{ marginTop: 20 }}>
+          <h3>Debug output:</h3>
+          <pre>{JSON.stringify(categories, null, 2)}</pre>
+        </div>
       </Panel>
     </>
   );
