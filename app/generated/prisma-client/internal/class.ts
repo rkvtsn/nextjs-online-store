@@ -22,7 +22,7 @@ const config: runtime.GetPrismaClientConfig = {
       "value": "prisma-client"
     },
     "output": {
-      "value": "c:\\Users\\user\\Desktop\\projects\\nextjs-online-store\\app\\generated\\prisma-client",
+      "value": "C:\\Users\\user\\Desktop\\projects\\nextjs-online-store\\app\\generated\\prisma-client",
       "fromEnvVar": null
     },
     "config": {
@@ -36,7 +36,7 @@ const config: runtime.GetPrismaClientConfig = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "c:\\Users\\user\\Desktop\\projects\\nextjs-online-store\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\user\\Desktop\\projects\\nextjs-online-store\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativePath": "../../../prisma",
