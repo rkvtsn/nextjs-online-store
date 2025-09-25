@@ -1,9 +1,9 @@
 import { prisma } from "../lib/prisma";
 import { hashSync } from "bcrypt";
-import { CATEGORIES } from "./constants/categories";
-import { FEATURES } from "./constants/features";
-import { PRODUCTS } from "./constants/products";
-import { PRODUCTS_KITCHEN } from "./constants/products_kitchen";
+import { CATEGORIES } from "./seeds/categories";
+import { FEATURES } from "./seeds/features";
+import { PRODUCTS } from "./seeds/products";
+import { PRODUCTS_KITCHEN } from "./seeds/products_kitchen";
 
 const onDrop = async () => {
   await prisma.variant.deleteMany({ where: {} });

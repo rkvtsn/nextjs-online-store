@@ -4,13 +4,13 @@ import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { useStoreCategory } from "@/store/category";
 import { PropsWithClassName } from "@/lib/types";
-import { Category } from "@/app/generated/prisma-client";
+import { CategoryModel } from "@/app/generated/prisma-client/models";
 import { serviceCategories } from "@/services/serviceCategories";
 
 export const Categories = ({ className }: PropsWithClassName) => {
   const activeCategoryId = useStoreCategory((state) => state.activeId);
 
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<CategoryModel[]>([]);
 
   useEffect(() => {
     serviceCategories

@@ -10,40 +10,29 @@ import PriceRangeInput from "@/components/common/PriceRangeInput";
 import ProductsFilterFeatures from "../ProductsFilterFeatures";
 import ProductsFilterNow from "../ProductsFilterNow";
 import {
-  PRICE_STATE_DEFAULT,
-  PriceState,
   PRODUCTS_FILTER_STATE_DEFAULT,
-  ProductsFilter,
+  TProductsFilter,
 } from "./state";
 
 export const ProductsFilter = ({ className }: PropsWithClassName) => {
   const router = useRouter();
-  const [state, setState] = useState<ProductsFilter>(
+  const [state, setState] = useState<TProductsFilter>(
     PRODUCTS_FILTER_STATE_DEFAULT
   );
 
-  const onChangeState = <K extends keyof ProductsFilter>(
-    name: K,
-    value: ProductsFilter[K]
-  ) => {
-    setState((prevState) => ({ ...prevState }));
-  };
-
-  const [priceFilter, setPriceFilter] =
-    useState<PriceState>(PRICE_STATE_DEFAULT);
-
-  const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
-
-  const [selectedNow, setSelectedNow] = useState<string[]>([]);
+  const onChangeState =
+    <K extends keyof TProductsFilter>(name: K) =>
+    (value: TProductsFilter[K]) => {
+      setState((prevState) => ({ ...prevState, [name]: value }));
+      return value
+    };
 
   useEffect(() => {
-    const queryString = QueryString.stringify({
-      ...priceFilter,
-      selectedFeatures,
-      selectedNow,
+    const queryString = QueryString.stringify(state);
+    router.push(`?${queryString}`, {
+      scroll: false
     });
-    router.push(`?${queryString}`);
-  }, [priceFilter, router, selectedFeatures, selectedNow]);
+  }, [router, state]);
 
   return (
     <div className={cn("side-filters", className)}>
@@ -51,16 +40,22 @@ export const ProductsFilter = ({ className }: PropsWithClassName) => {
         Filters:
       </Heading>
       <div className="flex flex-col gap-4">
-        <ProductsFilterNow value={selectedNow} onChange={setSelectedNow} />
+        <ProductsFilterNow
+          value={state.filterNow}
+          onChange={onChangeState("filterNow")}
+        />
       </div>
 
       <div className="mt-3 border-y border-y-neutral-100 py-6 pb-7">
-        <PriceRangeInput value={priceFilter} onChange={setPriceFilter} />
+        <PriceRangeInput
+          value={state.price}
+          onChange={onChangeState("price")}
+        />
       </div>
 
       <ProductsFilterFeatures
-        onChange={setSelectedFeatures}
-        value={selectedFeatures}
+        value={state.features}
+        onChange={onChangeState("features")}
       />
     </div>
   );

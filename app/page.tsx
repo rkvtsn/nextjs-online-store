@@ -1,10 +1,21 @@
+import { Heading } from "@/components/common/Heading";
 import { Panel } from "@/components/common/Panel";
 import { FilterBar } from "@/components/shared/FilterBar";
 import { ProductsGroup } from "@/components/shared/ProductsGroup";
 import { ProductsFilter } from "@/components/shared/ProductsFilter";
-import { Heading } from "lucide-react";
+import { serviceCategories } from "@/services/serviceCategories";
+import { CategoryWithProductsModel } from "@/services/models/Categories";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  let categories: CategoryWithProductsModel[] = [];
+  try {
+    categories = await serviceCategories.getWithProducts();
+  } catch (e) {
+    console.log(e);
+  }
+
   return (
     <>
       <Panel className="mt-10">
@@ -21,113 +32,13 @@ export default function Home() {
 
             <div className="flex-1">
               <div className="flex flex-col gap-16">
-                <ProductsGroup
-                  categoryId={1}
-                  products={[
-                    {
-                      id: 1,
-                      name: "Test goods",
-                      price: 0.99,
-                      imageUrl:
-                        "https://m.media-amazon.com/images/I/61dUcMdxR4L._AC_UL480_FMwebp_QL65_.jpg",
-                      description: "best thing ever",
-                    },
-                    {
-                      id: 2,
-                      name: "Test goods",
-                      price: 0.99,
-                      imageUrl:
-                        "https://m.media-amazon.com/images/I/61dUcMdxR4L._AC_UL480_FMwebp_QL65_.jpg",
-                      description: "best thing ever",
-                    },
-                    {
-                      id: 3,
-                      name: "Test goods",
-                      price: 0.99,
-                      imageUrl:
-                        "https://m.media-amazon.com/images/I/61dUcMdxR4L._AC_UL480_FMwebp_QL65_.jpg",
-                      description: "best thing ever",
-                    },
-                    {
-                      id: 4,
-                      name: "Test goods",
-                      price: 0.99,
-                      imageUrl:
-                        "https://m.media-amazon.com/images/I/61dUcMdxR4L._AC_UL480_FMwebp_QL65_.jpg",
-                      description: "best thing ever",
-                    },
-                    {
-                      id: 5,
-                      name: "Test goods",
-                      price: 0.99,
-                      imageUrl:
-                        "https://m.media-amazon.com/images/I/61dUcMdxR4L._AC_UL480_FMwebp_QL65_.jpg",
-                      description: "best thing ever",
-                    },
-                    {
-                      id: 6,
-                      name: "Test goods",
-                      price: 0.99,
-                      imageUrl:
-                        "https://m.media-amazon.com/images/I/61dUcMdxR4L._AC_UL480_FMwebp_QL65_.jpg",
-                      description: "best thing ever",
-                    },
-                  ]}
-                />
-
-                <ProductsGroup
-                  categoryId={2}
-                  products={[
-                    {
-                      id: 1,
-                      name: "Test goods",
-                      price: 0.99,
-                      imageUrl:
-                        "https://m.media-amazon.com/images/I/61dUcMdxR4L._AC_UL480_FMwebp_QL65_.jpg",
-                      description: "best thing ever",
-                    },
-                    {
-                      id: 2,
-                      name: "Test goods",
-                      price: 0.99,
-                      imageUrl:
-                        "https://m.media-amazon.com/images/I/61dUcMdxR4L._AC_UL480_FMwebp_QL65_.jpg",
-                      description: "best thing ever",
-                    },
-                    {
-                      id: 3,
-                      name: "Test goods",
-                      price: 0.99,
-                      imageUrl:
-                        "https://m.media-amazon.com/images/I/61dUcMdxR4L._AC_UL480_FMwebp_QL65_.jpg",
-                      description: "best thing ever",
-                    },
-                    {
-                      id: 4,
-                      name: "Test goods",
-                      price: 0.99,
-                      imageUrl:
-                        "https://m.media-amazon.com/images/I/61dUcMdxR4L._AC_UL480_FMwebp_QL65_.jpg",
-                      description: "best thing ever",
-                    },
-                    {
-                      id: 5,
-                      name: "Test goods",
-                      price: 0.99,
-                      imageUrl:
-                        "https://m.media-amazon.com/images/I/61dUcMdxR4L._AC_UL480_FMwebp_QL65_.jpg",
-                      description: "best thing ever",
-                    },
-                    {
-                      id: 6,
-                      name: "Test goods",
-                      price: 0.99,
-                      imageUrl:
-                        "https://m.media-amazon.com/images/I/61dUcMdxR4L._AC_UL480_FMwebp_QL65_.jpg",
-                      description: "best thing ever",
-                    },
-                  ]}
-                />
+                {categories.map((category) => (
+                  <ProductsGroup
+                    key={category.id}
+                    category={category}
+                    products={category.product}
+                  />
+                ))}
               </div>
             </div>
           </div>

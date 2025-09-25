@@ -3,8 +3,7 @@ import React from "react";
 
 const ProductPage = async ({ params }: PageProps<ProductPageProps>) => {
   const { id } = await params;
-  console.log(id);
-  return <div></div>;
+  return <div>{id}</div>;
 };
 
 export default ProductPage;

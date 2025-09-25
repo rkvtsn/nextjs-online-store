@@ -1,15 +1,17 @@
 "use client";
 
-import { ComponentProps, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
-import { CategoryId, useStoreCategory } from "@/store/category";
+import { useStoreCategory } from "@/store/category";
 import { Heading } from "@/components/common/Heading";
 import useIntersection from "@/lib/hooks/useIntersection";
 import { ProductCard } from "../ProductCard";
 import { PropsWithClassName } from "@/lib/types";
+import { CategoryWithProductsModel } from "@/services/models/Categories";
+import { CategoryModel } from "@/app/generated/prisma-client/models";
 
 export const ProductsGroup = (props: ProductsGroupProps) => {
-  const { products, className, classNameProducts, categoryId } = props;
+  const { products, className, classNameProducts, category } = props;
   const intersectionRef = useRef<HTMLDivElement>(null);
   const intersection = useIntersection(intersectionRef, {
     threshold: 0.4,
@@ -19,22 +21,28 @@ export const ProductsGroup = (props: ProductsGroupProps) => {
 
   useEffect(() => {
     if (intersection?.isIntersecting) {
-      setActiveCategoryId(categoryId);
+      setActiveCategoryId(category.id);
     }
-  }, [categoryId, intersection?.isIntersecting, setActiveCategoryId]);
+  }, [category.id, intersection?.isIntersecting, setActiveCategoryId]);
 
   return (
     <div
-      className={cn(`products-group-${categoryId}`, className)}
+      className={cn(`products-group-${category.id}`, className)}
       ref={intersectionRef}
     >
       <Heading size="lg" className="font-extrabold mb-5">
-        {[].find(({ id }) => id === categoryId)?.name}
+        {category.name}
       </Heading>
 
       <div className={cn("grid grid-cols-3 gap-[50px]", classNameProducts)}>
         {products.map((product) => (
-          <ProductCard key={product.id} {...product} />
+          <ProductCard
+            key={product.id}
+            id={product.id}
+            name={product.name}
+            imageUrl={product.imageUrl}
+            price={product.variants?.[0]?.price ?? "-"}
+          />
         ))}
       </div>
     </div>
@@ -42,7 +50,7 @@ export const ProductsGroup = (props: ProductsGroupProps) => {
 };
 
 type ProductsGroupProps = PropsWithClassName & {
-  products: ComponentProps<typeof ProductCard>[];
-  categoryId: CategoryId;
+  products: CategoryWithProductsModel["product"];
+  category: CategoryModel;
   classNameProducts?: PropsWithClassName["className"];
 };

@@ -27,7 +27,6 @@ const PriceRangeInput = ({
           type="number"
           placeholder={`${min}`}
           min={min}
-          defaultValue={min}
           max={max - 1}
           name="from"
           value={value.from}

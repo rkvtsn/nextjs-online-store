@@ -1,10 +1,11 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { Heading, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { PropsWithClassName } from "@/lib/types";
+import ProductImage from "../ProductImage";
+import { Heading } from "@/components/common/Heading";
 
 export const ProductCard = ({
   id,
@@ -17,13 +18,9 @@ export const ProductCard = ({
   return (
     <div className={cn("product-card", className)}>
       <Link href={`/product/${id}`}>
-        <div className="flex justify-center p-6 bg-secondary rounded-lg h-[260px]">
+        <div className="relative w-full h-[260px] rounded-lg overflow-hidden">
           {/* @todo: skeleton and src == undefined */}
-          <Image
-            src={imageUrl || ""}
-            alt={name}
-            className="w-[200px] h-[200px]"
-          />
+          <ProductImage imageUrl={imageUrl} name={name} />
         </div>
         <Heading size="sm" className="mb-1 mt-3 font-bold">
           {name}
@@ -43,7 +40,7 @@ export const ProductCard = ({
 };
 
 type ProductCardProps = PropsWithClassName & {
-  id: number;
+  id: string;
   price: number;
   name: string;
   imageUrl?: string;
