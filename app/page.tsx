@@ -12,9 +12,7 @@ export default async function Home() {
   let categories: CategoryWithProductsModel[] = [];
 
   try {
-    console.error("Home page: fetching categories...");
     categories = await serviceCategories.getWithProducts();
-    console.error("Home page: fetched categories:", JSON.stringify(categories, null, 2));
   } catch (e) {
     console.error("Home page: error fetching categories:", e);
   }
@@ -52,11 +50,6 @@ export default async function Home() {
             </div>
           </div>
         </Panel>
-
-        <div style={{ marginTop: 20 }}>
-          <h3>Debug output:</h3>
-          <pre>{JSON.stringify(categories, null, 2)}</pre>
-        </div>
       </Panel>
     </>
   );
