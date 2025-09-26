@@ -19,6 +19,20 @@ export const Categories = ({ className }: PropsWithClassName) => {
       .catch(() => setCategories([]));
   }, []);
 
+  const handleOnScrollTo: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
+    e.preventDefault();
+
+    const target = e.currentTarget;
+    const href = target.getAttribute("href");
+    if (!href) return;
+
+    const id = href.replace("#", "");
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div
       className={cn(
@@ -29,14 +43,16 @@ export const Categories = ({ className }: PropsWithClassName) => {
       {categories.map((category) => (
         <a
           className={cn(
-            "px-2 flex items-center font-bold h-8 rounded-2xl",
-            activeCategoryId === category.id &&
-              "shadow-md text-primary shadow-gray-200 bg-white"
+            "px-2 flex items-center font-bold h-8 rounded-2xl cursor-pointer transition-colors",
+            activeCategoryId === category.id
+              ? "shadow-md text-primary shadow-gray-200 bg-white"
+              : "text-gray-700 hover:bg-gray-100 hover:text-primary"
           )}
-          href={`/#${category.name}`}
+          href={`#${category.id}`}
           key={category.id}
+          onClick={handleOnScrollTo}
         >
-          <button>{category.name}</button>
+          {category.name}
         </a>
       ))}
     </div>

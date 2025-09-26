@@ -29,6 +29,7 @@ export const ProductsGroup = (props: ProductsGroupProps) => {
     <div
       className={cn(`products-group-${category.id}`, className)}
       ref={intersectionRef}
+      id={category.id.toString()}
     >
       <Heading size="lg" className="font-extrabold mb-5">
         {category.name}

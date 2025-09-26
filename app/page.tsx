@@ -19,7 +19,7 @@ export default async function Home() {
 
   return (
     <>
-      <Panel className="mt-10">
+      <Panel className="mt-10 pr-10 pl-10">
         <Heading size="lg" className="font-extrabold">
           All products
         </Heading>

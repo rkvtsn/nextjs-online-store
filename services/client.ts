@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const axiosClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_BASE_URL_LOCAL,
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL_LOCAL || process.env.NEXT_PUBLIC_BASE_URL,
 });
