@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import QueryString from "qs";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -11,6 +11,8 @@ import ProductsFilterFeatures from "../ProductsFilterFeatures";
 import ProductsFilterNow from "../ProductsFilterNow";
 import { PRODUCTS_FILTER_STATE_DEFAULT, TProductsFilter } from "./state";
 import { useDebounce } from "@/lib/hooks/useDebounce";
+import { getIsDirtyFilter } from "./utils/getIsDirtyFilter";
+import { parseQueryToFilterState } from "./utils/parseQueryToFilterState";
 
 export const ProductsFilter = ({ className }: PropsWithClassName) => {
   const router = useRouter();
@@ -18,33 +20,53 @@ export const ProductsFilter = ({ className }: PropsWithClassName) => {
     PRODUCTS_FILTER_STATE_DEFAULT
   );
 
-  const onChangeState =
+  const onChangeState = useCallback(
     <K extends keyof TProductsFilter>(name: K) =>
-    (value: TProductsFilter[K]) => {
-      setState((prevState) => ({ ...prevState, [name]: value }));
-    };
+      (value: TProductsFilter[K]) => {
+        setState((prevState) => {
+          const newValue = { ...prevState, [name]: value };
+          newValue.isDirty = getIsDirtyFilter(newValue);
+          return newValue;
+        });
+      },
+    []
+  );
 
   const debouncedRouterPush = useDebounce((state: TProductsFilter) => {
-    const queryString = QueryString.stringify(state);
+    const { isDirty, ...query } = state;
+    const queryString = QueryString.stringify(query);
     router.push(`?${queryString}`, { scroll: false });
   }, 300);
 
   useEffect(() => {
-    const queryState = QueryString.parse(
-      window.location.search.slice(1)
-    ) as Partial<TProductsFilter>;
-    setState({ ...PRODUCTS_FILTER_STATE_DEFAULT, ...queryState });
+    const queryState = parseQueryToFilterState(window.location.search.slice(1));
+    setState(queryState);
   }, []);
 
   useEffect(() => {
     debouncedRouterPush(state);
   }, [state, debouncedRouterPush]);
 
+  const handleOnClear = () => {
+    setState(PRODUCTS_FILTER_STATE_DEFAULT);
+  };
+
   return (
     <div className={cn("side-filters", className)}>
-      <Heading size="sm" className="font-bold mb-5">
-        Filters:
-      </Heading>
+      <div className="flex items-center justify-between mb-4">
+        <Heading size="sm" className="font-bold">
+          Filters
+        </Heading>
+        {state.isDirty && (
+          <button
+            onClick={handleOnClear}
+            className="text-xs text-primary hover:text-primary/70 transition-colors border-b-2 border-dotted border-black cursor-pointer"
+          >
+            Clear
+          </button>
+        )}
+      </div>
+
       <div className="flex flex-col gap-4">
         <ProductsFilterNow
           value={state.filterNow}

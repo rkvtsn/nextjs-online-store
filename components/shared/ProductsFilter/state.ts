@@ -12,10 +12,12 @@ export type TProductsFilter = {
   price: TPriceState;
   features: string[];
   filterNow: string[];
+  isDirty: boolean;
 };
 
 export const PRODUCTS_FILTER_STATE_DEFAULT: TProductsFilter = {
   features: [],
   filterNow: [],
   price: PRICE_STATE_DEFAULT,
+  isDirty: false,
 };
