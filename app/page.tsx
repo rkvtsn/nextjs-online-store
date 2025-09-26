@@ -32,7 +32,7 @@ export default async function Home() {
             </div>
 
             <div className="flex-1">
-              <div className="flex flex-col gap-16">
+              <div className="flex flex-col gap-5">
                 {categories.length === 0 && (
                   <div style={{ color: "red" }}>
                     Categories array is empty. Check logs.

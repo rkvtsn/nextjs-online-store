@@ -30,6 +30,13 @@ export const ProductsFilter = ({ className }: PropsWithClassName) => {
   }, 300);
 
   useEffect(() => {
+    const queryState = QueryString.parse(
+      window.location.search.slice(1)
+    ) as Partial<TProductsFilter>;
+    setState({ ...PRODUCTS_FILTER_STATE_DEFAULT, ...queryState });
+  }, []);
+
+  useEffect(() => {
     debouncedRouterPush(state);
   }, [state, debouncedRouterPush]);
 

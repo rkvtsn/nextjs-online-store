@@ -28,7 +28,7 @@ export const ProductCard = ({
         <p className="text-sm text-gray-400">{description}</p>
 
         <div className="flex justify-between items-center mt-4">
-          <span className="text-[20px]">${price}</span>
+          <span className="text-[1em]">from ${price}</span>
           <Button variant="secondary" className="text-base font-bold">
             <Plus size={20} className="mr-1" />
             Add

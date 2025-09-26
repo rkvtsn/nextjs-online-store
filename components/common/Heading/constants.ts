@@ -7,10 +7,10 @@ export const HEADING_MAP: Record<
   SizingType,
   { tag: HeadingTag; className: HeadingClassName }
 > = {
-  xs: { tag: "h5", className: "text-[16px]" },
-  sm: { tag: "h4", className: "text-[22px]" },
-  md: { tag: "h3", className: "text-[26px]" },
-  lg: { tag: "h2", className: "text-[32px]" },
-  xl: { tag: "h1", className: "text-[40px]" },
-  "2xl": { tag: "h1", className: "text-[48px]" },
+  xs: { tag: "h5", className: "text-[1.2em]" },
+  sm: { tag: "h4", className: "text-[1.33em]" },
+  md: { tag: "h3", className: "text-[1.41em]" },
+  lg: { tag: "h2", className: "text-[1.53em]" },
+  xl: { tag: "h1", className: "text-[1.73em]" },
+  "2xl": { tag: "h1", className: "text-[1.8em]" },
 };
