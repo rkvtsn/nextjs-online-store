@@ -11,8 +11,17 @@ const PriceRangeInput = ({
   min = INPUT_RANGE_MIN,
   max = INPUT_RANGE_MAX,
 }: InputRangeProps) => {
+
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    onChange?.({ ...value, [e.target.name]: e.target.value });
+    const num = Number(e.target.value);
+    const newValue = {
+      ...value,
+      [e.target.name]:
+        e.target.name === "from"
+          ? Math.min(num, value.to)
+          : Math.max(num, value.from),
+    };
+    onChange?.(newValue);
   };
 
   const handleOnRangeChange = ([from, to]: number[]) => {
@@ -31,6 +40,7 @@ const PriceRangeInput = ({
           name="from"
           value={value.from}
           onChange={handleOnChange}
+          aria-label="Minimum price"
         />
         <Input
           type="number"
@@ -40,6 +50,7 @@ const PriceRangeInput = ({
           name="to"
           value={value.to}
           onChange={handleOnChange}
+          aria-label="Maximum price"
         />
       </div>
       <RangeSlider
@@ -48,6 +59,7 @@ const PriceRangeInput = ({
         step={10}
         value={[value.from, value.to]}
         onValueChange={handleOnRangeChange}
+        aria-label="Price range slider"
       />
     </>
   );

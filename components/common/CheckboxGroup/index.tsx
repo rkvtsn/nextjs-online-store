@@ -69,18 +69,19 @@ export const CheckboxGroup = (props: CheckboxGroupProps) => {
         </div>
       ) : (
         <>
-          {!isShowAll && (
-            <div className="mb-5">
-              <Input
-                value={search}
-                onChange={onChangeSearch}
-                placeholder={placeholder}
-                className="bg-gray-50 border-none"
-              />
-            </div>
-          )}
-
-          <div className="flex flex-col gap-4 max-h-96 pr-2 overflow-auto scroll-auto">
+          <div className="mb-5">
+            <Input
+              value={search}
+              onChange={onChangeSearch}
+              placeholder={placeholder}
+              className="bg-gray-50 border-none"
+            />
+          </div>
+          <div
+            className={`flex flex-col gap-4 pr-2 transition-[max-height] duration-300 ease-in-out ${
+              isShowAll ? "max-h-96 overflow-hidden" : "max-h-59 overflow-auto"
+            }`}
+          >
             {filteredItems.map((itemProps) => (
               <CheckboxWithLabel
                 key={itemProps.value}
@@ -90,12 +91,27 @@ export const CheckboxGroup = (props: CheckboxGroupProps) => {
               />
             ))}
           </div>
+
           {items.length > limit && (
             <div
-              className={isShowAll ? "border-t border-t-neutral-100 mt-4" : ""}
+              className={`mt-3 transition-colors duration-200 ${
+                isShowAll ? "" : "border-t border-neutral-200 pt-4"
+              }`}
             >
-              <button onClick={toggleShowAll} className="text-primary mt-3">
-                {isShowAll ? "- Hide" : "+ Show all"}
+              <button
+                onClick={toggleShowAll}
+                className="text-primary font-medium flex items-center gap-1 cursor-pointer hover:text-primary/70 transition-colors"
+                aria-expanded={isShowAll}
+              >
+                {isShowAll ? (
+                  <>
+                    <span className="text-lg">−</span> Hide
+                  </>
+                ) : (
+                  <>
+                    <span className="text-lg">+</span> Show all
+                  </>
+                )}
               </button>
             </div>
           )}

@@ -9,10 +9,8 @@ import { PropsWithClassName } from "@/lib/types";
 import PriceRangeInput from "@/components/common/PriceRangeInput";
 import ProductsFilterFeatures from "../ProductsFilterFeatures";
 import ProductsFilterNow from "../ProductsFilterNow";
-import {
-  PRODUCTS_FILTER_STATE_DEFAULT,
-  TProductsFilter,
-} from "./state";
+import { PRODUCTS_FILTER_STATE_DEFAULT, TProductsFilter } from "./state";
+import { useDebounce } from "@/lib/hooks/useDebounce";
 
 export const ProductsFilter = ({ className }: PropsWithClassName) => {
   const router = useRouter();
@@ -24,15 +22,16 @@ export const ProductsFilter = ({ className }: PropsWithClassName) => {
     <K extends keyof TProductsFilter>(name: K) =>
     (value: TProductsFilter[K]) => {
       setState((prevState) => ({ ...prevState, [name]: value }));
-      return value
     };
 
-  useEffect(() => {
+  const debouncedRouterPush = useDebounce((state: TProductsFilter) => {
     const queryString = QueryString.stringify(state);
-    router.push(`?${queryString}`, {
-      scroll: false
-    });
-  }, [router, state]);
+    router.push(`?${queryString}`, { scroll: false });
+  }, 300);
+
+  useEffect(() => {
+    debouncedRouterPush(state);
+  }, [state, debouncedRouterPush]);
 
   return (
     <div className={cn("side-filters", className)}>
