@@ -13,16 +13,10 @@ export function parseQueryToFilterState(query: string): TProductsFilter {
   }
 
   const parsed = QueryString.parse(query);
-
-  let price = { ...PRODUCTS_FILTER_STATE_DEFAULT.price };
-  const priceRaw = parsed.price;
-  if (typeof priceRaw === "object" && priceRaw !== null) {
-    const obj = priceRaw as Record<string, unknown>;
-    price = {
-      from: toNumber(obj.from, PRODUCTS_FILTER_STATE_DEFAULT.price.from),
-      to: toNumber(obj.to, PRODUCTS_FILTER_STATE_DEFAULT.price.to),
-    };
-  }
+  const price = {
+    from: toNumber(parsed.price_from, PRODUCTS_FILTER_STATE_DEFAULT.price.from),
+    to: toNumber(parsed.price_to, PRODUCTS_FILTER_STATE_DEFAULT.price.to),
+  };
 
   const filterNow = parsed.filterNow
     ? toStringArray(parsed.filterNow)

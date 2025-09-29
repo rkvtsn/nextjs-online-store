@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
-import QueryString from "qs";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Heading } from "@/components/common/Heading";
 import { PropsWithClassName } from "@/lib/types";
@@ -13,11 +12,14 @@ import { PRODUCTS_FILTER_STATE_DEFAULT, TProductsFilter } from "./state";
 import { useDebounce } from "@/lib/hooks/useDebounce";
 import { getIsDirtyFilter } from "./utils/getIsDirtyFilter";
 import { parseQueryToFilterState } from "./utils/parseQueryToFilterState";
+import { parseQueryFromFilterState } from "./utils/parseQueryFromFilterState";
+import { useFeaturesOptions } from "../ProductsFilterFeatures/useFeaturesOptions";
 
 export const ProductsFilter = ({ className }: PropsWithClassName) => {
   const router = useRouter();
-  const [state, setState] = useState<TProductsFilter>(
-    PRODUCTS_FILTER_STATE_DEFAULT
+  const searchParams = useSearchParams();
+  const [state, setState] = useState<TProductsFilter>(() =>
+    parseQueryToFilterState(searchParams.toString())
   );
 
   const onChangeState = useCallback(
@@ -33,15 +35,11 @@ export const ProductsFilter = ({ className }: PropsWithClassName) => {
   );
 
   const debouncedRouterPush = useDebounce((state: TProductsFilter) => {
-    const { isDirty, ...query } = state;
-    const queryString = QueryString.stringify(query);
-    router.push(`?${queryString}`, { scroll: false });
+    const queryString = parseQueryFromFilterState(state);
+    if (queryString !== searchParams.toString()) {
+      router.replace(`?${queryString}`, { scroll: false });
+    }
   }, 300);
-
-  useEffect(() => {
-    const queryState = parseQueryToFilterState(window.location.search.slice(1));
-    setState(queryState);
-  }, []);
 
   useEffect(() => {
     debouncedRouterPush(state);
@@ -49,8 +47,15 @@ export const ProductsFilter = ({ className }: PropsWithClassName) => {
 
   const handleOnClear = () => {
     setState(PRODUCTS_FILTER_STATE_DEFAULT);
+    router.replace("?", { scroll: false });
   };
 
+  const {
+    features,
+    specialFeatures,
+    isLoading: featuresIsLoading,
+  } = useFeaturesOptions();
+  console.log({ specialFeatures });
   return (
     <div className={cn("side-filters", className)}>
       <div className="flex items-center justify-between mb-4">
@@ -69,6 +74,8 @@ export const ProductsFilter = ({ className }: PropsWithClassName) => {
 
       <div className="flex flex-col gap-4">
         <ProductsFilterNow
+          items={specialFeatures}
+          isLoading={featuresIsLoading}
           value={state.filterNow}
           onChange={onChangeState("filterNow")}
         />
@@ -82,6 +89,8 @@ export const ProductsFilter = ({ className }: PropsWithClassName) => {
       </div>
 
       <ProductsFilterFeatures
+        items={features}
+        isLoading={featuresIsLoading}
         value={state.features}
         onChange={onChangeState("features")}
       />

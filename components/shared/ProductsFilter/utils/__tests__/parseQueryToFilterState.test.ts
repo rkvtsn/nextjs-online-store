@@ -20,13 +20,13 @@ describe("parseQueryToFilterState", () => {
   });
 
   it("returns true isDirty if any field differs from default", () => {
-    const query = QueryString.stringify({ price: { from: 10, to: 100 } });
+    const query = QueryString.stringify({ price_from: 10, price_to: 100 });
     const state = parseQueryToFilterState(query);
     expect(state.isDirty).toBe(true);
   });
 
   it("parses price.from and price.to correctly", () => {
-    const query = "price[from]=50&price[to]=150";
+    const query = "price_from=50&price_to=150";
     const state = parseQueryToFilterState(query);
     expect(state.price.from).toBe(50);
     expect(state.price.to).toBe(150);
@@ -45,7 +45,7 @@ describe("parseQueryToFilterState", () => {
   });
 
   it("uses fallback for invalid price", () => {
-    const query = "price[from]=abc&price[to]=";
+    const query = "price_from=abc&price_to=";
     const state = parseQueryToFilterState(query);
     expect(state.price.from).toBe(PRODUCTS_FILTER_STATE_DEFAULT.price.from);
     expect(state.price.to).toBe(PRODUCTS_FILTER_STATE_DEFAULT.price.to);

@@ -7,22 +7,44 @@ export const useFeaturesOptions = () => {
     ComponentProps<typeof CheckboxWithLabel>[]
   >([]);
 
+  const [specialFeatures, setSpecialFeatures] = useState<
+    ComponentProps<typeof CheckboxWithLabel>[]
+  >([]);
+
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
     serviceFeatures
       .getAll()
-      .then((data) =>
-        setFeatures(data.map(({ name, id }) => ({ label: name, value: id, checked: false })))
-      )
+      .then((data) => {
+        setFeatures(
+          data
+            .filter(({ price }) => price !== null)
+            .map(({ name, id }) => ({
+              label: name,
+              value: `${id}`,
+              checked: false,
+            }))
+        );
+        setSpecialFeatures(
+          data
+            .filter(({ price }) => price === null)
+            .map(({ name, id }) => ({
+              label: name,
+              value: `${id}`,
+              checked: false,
+            }))
+        );
+      })
       .catch(() => {
         setFeatures([]);
+        setSpecialFeatures([]);
       })
       .finally(() => {
         setIsLoading(false);
       });
   }, []);
 
-  return { features, isLoading };
+  return { features, specialFeatures, isLoading };
 };

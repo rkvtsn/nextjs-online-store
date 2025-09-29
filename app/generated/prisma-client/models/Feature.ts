@@ -26,31 +26,35 @@ export type AggregateFeature = {
 }
 
 export type FeatureAvgAggregateOutputType = {
+  id: number | null
   price: number | null
+  purchaseId: number | null
 }
 
 export type FeatureSumAggregateOutputType = {
+  id: number | null
   price: number | null
+  purchaseId: number | null
 }
 
 export type FeatureMinAggregateOutputType = {
-  id: string | null
+  id: number | null
   name: string | null
   price: number | null
   imageUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
-  purchaseId: string | null
+  purchaseId: number | null
 }
 
 export type FeatureMaxAggregateOutputType = {
-  id: string | null
+  id: number | null
   name: string | null
   price: number | null
   imageUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
-  purchaseId: string | null
+  purchaseId: number | null
 }
 
 export type FeatureCountAggregateOutputType = {
@@ -66,11 +70,15 @@ export type FeatureCountAggregateOutputType = {
 
 
 export type FeatureAvgAggregateInputType = {
+  id?: true
   price?: true
+  purchaseId?: true
 }
 
 export type FeatureSumAggregateInputType = {
+  id?: true
   price?: true
+  purchaseId?: true
 }
 
 export type FeatureMinAggregateInputType = {
@@ -191,13 +199,13 @@ export type FeatureGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 export type FeatureGroupByOutputType = {
-  id: string
+  id: number
   name: string
   price: number | null
   imageUrl: string | null
   createdAt: Date
   updatedAt: Date
-  purchaseId: string | null
+  purchaseId: number | null
   _count: FeatureCountAggregateOutputType | null
   _avg: FeatureAvgAggregateOutputType | null
   _sum: FeatureSumAggregateOutputType | null
@@ -224,13 +232,13 @@ export type FeatureWhereInput = {
   AND?: Prisma.FeatureWhereInput | Prisma.FeatureWhereInput[]
   OR?: Prisma.FeatureWhereInput[]
   NOT?: Prisma.FeatureWhereInput | Prisma.FeatureWhereInput[]
-  id?: Prisma.StringFilter<"Feature"> | string
+  id?: Prisma.IntFilter<"Feature"> | number
   name?: Prisma.StringFilter<"Feature"> | string
   price?: Prisma.FloatNullableFilter<"Feature"> | number | null
   imageUrl?: Prisma.StringNullableFilter<"Feature"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Feature"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Feature"> | Date | string
-  purchaseId?: Prisma.StringNullableFilter<"Feature"> | string | null
+  purchaseId?: Prisma.IntNullableFilter<"Feature"> | number | null
   products?: Prisma.ProductListRelationFilter
   purchase?: Prisma.XOR<Prisma.PurchaseNullableScalarRelationFilter, Prisma.PurchaseWhereInput> | null
 }
@@ -248,7 +256,7 @@ export type FeatureOrderByWithRelationInput = {
 }
 
 export type FeatureWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.FeatureWhereInput | Prisma.FeatureWhereInput[]
   OR?: Prisma.FeatureWhereInput[]
   NOT?: Prisma.FeatureWhereInput | Prisma.FeatureWhereInput[]
@@ -257,7 +265,7 @@ export type FeatureWhereUniqueInput = Prisma.AtLeast<{
   imageUrl?: Prisma.StringNullableFilter<"Feature"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Feature"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Feature"> | Date | string
-  purchaseId?: Prisma.StringNullableFilter<"Feature"> | string | null
+  purchaseId?: Prisma.IntNullableFilter<"Feature"> | number | null
   products?: Prisma.ProductListRelationFilter
   purchase?: Prisma.XOR<Prisma.PurchaseNullableScalarRelationFilter, Prisma.PurchaseWhereInput> | null
 }, "id">
@@ -281,17 +289,16 @@ export type FeatureScalarWhereWithAggregatesInput = {
   AND?: Prisma.FeatureScalarWhereWithAggregatesInput | Prisma.FeatureScalarWhereWithAggregatesInput[]
   OR?: Prisma.FeatureScalarWhereWithAggregatesInput[]
   NOT?: Prisma.FeatureScalarWhereWithAggregatesInput | Prisma.FeatureScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Feature"> | string
+  id?: Prisma.IntWithAggregatesFilter<"Feature"> | number
   name?: Prisma.StringWithAggregatesFilter<"Feature"> | string
   price?: Prisma.FloatNullableWithAggregatesFilter<"Feature"> | number | null
   imageUrl?: Prisma.StringNullableWithAggregatesFilter<"Feature"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Feature"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Feature"> | Date | string
-  purchaseId?: Prisma.StringNullableWithAggregatesFilter<"Feature"> | string | null
+  purchaseId?: Prisma.IntNullableWithAggregatesFilter<"Feature"> | number | null
 }
 
 export type FeatureCreateInput = {
-  id?: string
   name: string
   price?: number | null
   imageUrl?: string | null
@@ -302,18 +309,17 @@ export type FeatureCreateInput = {
 }
 
 export type FeatureUncheckedCreateInput = {
-  id?: string
+  id?: number
   name: string
   price?: number | null
   imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  purchaseId?: string | null
+  purchaseId?: number | null
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutFeaturesInput
 }
 
 export type FeatureUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -324,28 +330,27 @@ export type FeatureUpdateInput = {
 }
 
 export type FeatureUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  purchaseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purchaseId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   products?: Prisma.ProductUncheckedUpdateManyWithoutFeaturesNestedInput
 }
 
 export type FeatureCreateManyInput = {
-  id?: string
+  id?: number
   name: string
   price?: number | null
   imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  purchaseId?: string | null
+  purchaseId?: number | null
 }
 
 export type FeatureUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -354,13 +359,13 @@ export type FeatureUpdateManyMutationInput = {
 }
 
 export type FeatureUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  purchaseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purchaseId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type FeatureListRelationFilter = {
@@ -384,7 +389,9 @@ export type FeatureCountOrderByAggregateInput = {
 }
 
 export type FeatureAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  purchaseId?: Prisma.SortOrder
 }
 
 export type FeatureMaxOrderByAggregateInput = {
@@ -408,7 +415,9 @@ export type FeatureMinOrderByAggregateInput = {
 }
 
 export type FeatureSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  purchaseId?: Prisma.SortOrder
 }
 
 export type FeatureCreateNestedManyWithoutPurchaseInput = {
@@ -500,7 +509,6 @@ export type FeatureUncheckedUpdateManyWithoutProductsNestedInput = {
 }
 
 export type FeatureCreateWithoutPurchaseInput = {
-  id?: string
   name: string
   price?: number | null
   imageUrl?: string | null
@@ -510,7 +518,7 @@ export type FeatureCreateWithoutPurchaseInput = {
 }
 
 export type FeatureUncheckedCreateWithoutPurchaseInput = {
-  id?: string
+  id?: number
   name: string
   price?: number | null
   imageUrl?: string | null
@@ -549,17 +557,16 @@ export type FeatureScalarWhereInput = {
   AND?: Prisma.FeatureScalarWhereInput | Prisma.FeatureScalarWhereInput[]
   OR?: Prisma.FeatureScalarWhereInput[]
   NOT?: Prisma.FeatureScalarWhereInput | Prisma.FeatureScalarWhereInput[]
-  id?: Prisma.StringFilter<"Feature"> | string
+  id?: Prisma.IntFilter<"Feature"> | number
   name?: Prisma.StringFilter<"Feature"> | string
   price?: Prisma.FloatNullableFilter<"Feature"> | number | null
   imageUrl?: Prisma.StringNullableFilter<"Feature"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Feature"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Feature"> | Date | string
-  purchaseId?: Prisma.StringNullableFilter<"Feature"> | string | null
+  purchaseId?: Prisma.IntNullableFilter<"Feature"> | number | null
 }
 
 export type FeatureCreateWithoutProductsInput = {
-  id?: string
   name: string
   price?: number | null
   imageUrl?: string | null
@@ -569,13 +576,13 @@ export type FeatureCreateWithoutProductsInput = {
 }
 
 export type FeatureUncheckedCreateWithoutProductsInput = {
-  id?: string
+  id?: number
   name: string
   price?: number | null
   imageUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  purchaseId?: string | null
+  purchaseId?: number | null
 }
 
 export type FeatureCreateOrConnectWithoutProductsInput = {
@@ -600,7 +607,7 @@ export type FeatureUpdateManyWithWhereWithoutProductsInput = {
 }
 
 export type FeatureCreateManyPurchaseInput = {
-  id?: string
+  id?: number
   name: string
   price?: number | null
   imageUrl?: string | null
@@ -609,7 +616,6 @@ export type FeatureCreateManyPurchaseInput = {
 }
 
 export type FeatureUpdateWithoutPurchaseInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -619,7 +625,7 @@ export type FeatureUpdateWithoutPurchaseInput = {
 }
 
 export type FeatureUncheckedUpdateWithoutPurchaseInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -629,7 +635,7 @@ export type FeatureUncheckedUpdateWithoutPurchaseInput = {
 }
 
 export type FeatureUncheckedUpdateManyWithoutPurchaseInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -638,7 +644,6 @@ export type FeatureUncheckedUpdateManyWithoutPurchaseInput = {
 }
 
 export type FeatureUpdateWithoutProductsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -648,23 +653,23 @@ export type FeatureUpdateWithoutProductsInput = {
 }
 
 export type FeatureUncheckedUpdateWithoutProductsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  purchaseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purchaseId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type FeatureUncheckedUpdateManyWithoutProductsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  purchaseId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purchaseId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -763,13 +768,13 @@ export type $FeaturePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     purchase: Prisma.$PurchasePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    id: number
     name: string
     price: number | null
     imageUrl: string | null
     createdAt: Date
     updatedAt: Date
-    purchaseId: string | null
+    purchaseId: number | null
   }, ExtArgs["result"]["feature"]>
   composites: {}
 }
@@ -1195,13 +1200,13 @@ export interface Prisma__FeatureClient<T, Null = never, ExtArgs extends runtime.
  * Fields of the Feature model
  */
 export interface FeatureFieldRefs {
-  readonly id: Prisma.FieldRef<"Feature", 'String'>
+  readonly id: Prisma.FieldRef<"Feature", 'Int'>
   readonly name: Prisma.FieldRef<"Feature", 'String'>
   readonly price: Prisma.FieldRef<"Feature", 'Float'>
   readonly imageUrl: Prisma.FieldRef<"Feature", 'String'>
   readonly createdAt: Prisma.FieldRef<"Feature", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Feature", 'DateTime'>
-  readonly purchaseId: Prisma.FieldRef<"Feature", 'String'>
+  readonly purchaseId: Prisma.FieldRef<"Feature", 'Int'>
 }
     
 

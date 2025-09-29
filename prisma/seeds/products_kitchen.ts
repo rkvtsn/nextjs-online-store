@@ -1,16 +1,7 @@
-import { ProductModel, VariantModel } from "@/app/generated/prisma-client/models";
 import { CATEGORIES_MAP } from "./categories";
-import { FeatureName } from "./features";
+import { ProductSeed } from "./types";
 
-type ProductKitchenSeed = Omit<
-  ProductModel,
-  "features" | "id" | "updatedAt" | "createdAt"
-> & {
-  features: FeatureName[];
-  variants: Omit<VariantModel, "id" | "productId">[];
-};
-
-export const PRODUCTS_KITCHEN: ProductKitchenSeed[] = [
+export const PRODUCTS_KITCHEN: ProductSeed[] = [
   {
     name: "Bowl slim",
     categoryId: CATEGORIES_MAP["Kitchen"],

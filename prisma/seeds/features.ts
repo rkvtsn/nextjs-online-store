@@ -37,51 +37,39 @@ const FEATURES_RAW = [
     price: 1.1,
   },
   {
-    name: "Brand",
-    imageUrl: "",
-    price: 0,
-  },
-  {
-    name: "Combination",
-    imageUrl: "",
-    price: 0,
-  },
-  {
-    name: "Year",
-    imageUrl: "",
-    price: 0,
-  },
-  {
-    name: "Material",
-    imageUrl: "",
-    price: 0,
-  },
-  {
     name: "Sugar free",
     imageUrl: "",
-    price: 0,
+    price: null,
+  },
+  {
+    name: "Spicy",
+    imageUrl: "",
+    price: null,
   },
   {
     name: "Gluten free",
     imageUrl: "",
-    price: 0,
+    price: null,
   },
   {
     name: "BIO",
     imageUrl: "",
-    price: 0,
+    price: null,
   },
   {
     name: "Fresh",
     imageUrl: "",
-    price: 0,
+    price: null,
   },
 ] as const;
 
 export type FeatureName = (typeof FEATURES_RAW)[number]["name"];
 
 type FeaturesSeed = Readonly<
-  Omit<FeatureModel, "id" | "createdAt" | "updatedAt" | "purchaseId" | "name"> & {
+  Omit<
+    FeatureModel,
+    "id" | "createdAt" | "updatedAt" | "purchaseId" | "name"
+  > & {
     name: FeatureName;
   }
 >;

@@ -40,7 +40,7 @@ export const ProductCard = ({
 };
 
 type ProductCardProps = PropsWithClassName & {
-  id: string;
+  id: number;
   price: number;
   name: string;
   imageUrl?: string;

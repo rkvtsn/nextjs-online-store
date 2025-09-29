@@ -22,7 +22,7 @@ enum UserType {
 }
 
 model User {
-    id           String        @id @default(cuid())
+    id           Int           @id @default(autoincrement())
     name         String
     email        String        @unique
     password     String
@@ -38,9 +38,9 @@ model User {
 }
 
 model Cart {
-    id          String     @id @default(cuid())
+    id          Int        @id @default(autoincrement())
     user        User?      @relation(fields: [userId], references: [id])
-    userId      String?    @unique
+    userId      Int?       @unique
     totalAmount Float      @default(0)
     sessionId   String
     purchases   Purchase[]
@@ -49,9 +49,9 @@ model Cart {
 }
 
 model Order {
-    id          String      @id @default(cuid())
+    id          Int         @id @default(autoincrement())
     user        User?       @relation(fields: [userId], references: [id])
-    userId      String?
+    userId      Int?
     paymentId   String?
     sessionId   String
     status      OrderStatus
@@ -67,14 +67,14 @@ model Order {
 }
 
 model Purchase {
-    id          String    @id @default(cuid())
+    id          Int       @id @default(autoincrement())
     variant     Variant   @relation(fields: [variantId], references: [id])
-    variantId   String
+    variantId   Int
     cart        Cart      @relation(fields: [cartId], references: [id])
-    cartId      String
+    cartId      Int
     features    Feature[]
     order       Order?    @relation(fields: [orderId], references: [id])
-    orderId     String?
+    orderId     Int?
     quantity    Int
     // we have to save original info
     price       Float
@@ -89,7 +89,7 @@ model Category {
 }
 
 model Feature {
-    id         String    @id @default(cuid())
+    id         Int       @id @default(autoincrement())
     products   Product[] @relation(name: "FeatureToProduct")
     name       String
     price      Float?
@@ -97,11 +97,11 @@ model Feature {
     createdAt  DateTime  @default(now())
     updatedAt  DateTime  @updatedAt
     purchase   Purchase? @relation(fields: [purchaseId], references: [id])
-    purchaseId String?
+    purchaseId Int?
 }
 
 model Product {
-    id         String    @id @default(cuid())
+    id         Int       @id @default(autoincrement())
     categoryId Int
     category   Category  @relation(fields: [categoryId], references: [id])
     features   Feature[] @relation(name: "FeatureToProduct")
@@ -113,10 +113,10 @@ model Product {
 }
 
 model Variant {
-    id          String     @id @default(cuid())
+    id          Int        @id @default(autoincrement())
     sku         String
     product     Product    @relation(fields: [productId], references: [id])
-    productId   String
+    productId   Int
     purchases   Purchase[]
     name        String
     price       Float
@@ -124,9 +124,9 @@ model Variant {
 }
 
 model Verification {
-    id        String   @id @default(cuid())
+    id        Int      @id @default(autoincrement())
     user      User     @relation(fields: [userId], references: [id])
-    userId    String   @unique
+    userId    Int      @unique
     value     String   @unique
     createdAt DateTime @default(now())
 

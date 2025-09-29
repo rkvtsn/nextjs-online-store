@@ -26,26 +26,30 @@ export type AggregateVariant = {
 }
 
 export type VariantAvgAggregateOutputType = {
+  id: number | null
+  productId: number | null
   price: number | null
 }
 
 export type VariantSumAggregateOutputType = {
+  id: number | null
+  productId: number | null
   price: number | null
 }
 
 export type VariantMinAggregateOutputType = {
-  id: string | null
+  id: number | null
   sku: string | null
-  productId: string | null
+  productId: number | null
   name: string | null
   price: number | null
   description: string | null
 }
 
 export type VariantMaxAggregateOutputType = {
-  id: string | null
+  id: number | null
   sku: string | null
-  productId: string | null
+  productId: number | null
   name: string | null
   price: number | null
   description: string | null
@@ -63,10 +67,14 @@ export type VariantCountAggregateOutputType = {
 
 
 export type VariantAvgAggregateInputType = {
+  id?: true
+  productId?: true
   price?: true
 }
 
 export type VariantSumAggregateInputType = {
+  id?: true
+  productId?: true
   price?: true
 }
 
@@ -185,9 +193,9 @@ export type VariantGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 export type VariantGroupByOutputType = {
-  id: string
+  id: number
   sku: string
-  productId: string
+  productId: number
   name: string
   price: number
   description: string | null
@@ -217,9 +225,9 @@ export type VariantWhereInput = {
   AND?: Prisma.VariantWhereInput | Prisma.VariantWhereInput[]
   OR?: Prisma.VariantWhereInput[]
   NOT?: Prisma.VariantWhereInput | Prisma.VariantWhereInput[]
-  id?: Prisma.StringFilter<"Variant"> | string
+  id?: Prisma.IntFilter<"Variant"> | number
   sku?: Prisma.StringFilter<"Variant"> | string
-  productId?: Prisma.StringFilter<"Variant"> | string
+  productId?: Prisma.IntFilter<"Variant"> | number
   name?: Prisma.StringFilter<"Variant"> | string
   price?: Prisma.FloatFilter<"Variant"> | number
   description?: Prisma.StringNullableFilter<"Variant"> | string | null
@@ -239,12 +247,12 @@ export type VariantOrderByWithRelationInput = {
 }
 
 export type VariantWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  id?: number
   AND?: Prisma.VariantWhereInput | Prisma.VariantWhereInput[]
   OR?: Prisma.VariantWhereInput[]
   NOT?: Prisma.VariantWhereInput | Prisma.VariantWhereInput[]
   sku?: Prisma.StringFilter<"Variant"> | string
-  productId?: Prisma.StringFilter<"Variant"> | string
+  productId?: Prisma.IntFilter<"Variant"> | number
   name?: Prisma.StringFilter<"Variant"> | string
   price?: Prisma.FloatFilter<"Variant"> | number
   description?: Prisma.StringNullableFilter<"Variant"> | string | null
@@ -270,16 +278,15 @@ export type VariantScalarWhereWithAggregatesInput = {
   AND?: Prisma.VariantScalarWhereWithAggregatesInput | Prisma.VariantScalarWhereWithAggregatesInput[]
   OR?: Prisma.VariantScalarWhereWithAggregatesInput[]
   NOT?: Prisma.VariantScalarWhereWithAggregatesInput | Prisma.VariantScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Variant"> | string
+  id?: Prisma.IntWithAggregatesFilter<"Variant"> | number
   sku?: Prisma.StringWithAggregatesFilter<"Variant"> | string
-  productId?: Prisma.StringWithAggregatesFilter<"Variant"> | string
+  productId?: Prisma.IntWithAggregatesFilter<"Variant"> | number
   name?: Prisma.StringWithAggregatesFilter<"Variant"> | string
   price?: Prisma.FloatWithAggregatesFilter<"Variant"> | number
   description?: Prisma.StringNullableWithAggregatesFilter<"Variant"> | string | null
 }
 
 export type VariantCreateInput = {
-  id?: string
   sku: string
   name: string
   price: number
@@ -289,9 +296,9 @@ export type VariantCreateInput = {
 }
 
 export type VariantUncheckedCreateInput = {
-  id?: string
+  id?: number
   sku: string
-  productId: string
+  productId: number
   name: string
   price: number
   description?: string | null
@@ -299,7 +306,6 @@ export type VariantUncheckedCreateInput = {
 }
 
 export type VariantUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -309,9 +315,9 @@ export type VariantUpdateInput = {
 }
 
 export type VariantUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   sku?: Prisma.StringFieldUpdateOperationsInput | string
-  productId?: Prisma.StringFieldUpdateOperationsInput | string
+  productId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -319,16 +325,15 @@ export type VariantUncheckedUpdateInput = {
 }
 
 export type VariantCreateManyInput = {
-  id?: string
+  id?: number
   sku: string
-  productId: string
+  productId: number
   name: string
   price: number
   description?: string | null
 }
 
 export type VariantUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -336,9 +341,9 @@ export type VariantUpdateManyMutationInput = {
 }
 
 export type VariantUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   sku?: Prisma.StringFieldUpdateOperationsInput | string
-  productId?: Prisma.StringFieldUpdateOperationsInput | string
+  productId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -369,6 +374,8 @@ export type VariantCountOrderByAggregateInput = {
 }
 
 export type VariantAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  productId?: Prisma.SortOrder
   price?: Prisma.SortOrder
 }
 
@@ -391,6 +398,8 @@ export type VariantMinOrderByAggregateInput = {
 }
 
 export type VariantSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  productId?: Prisma.SortOrder
   price?: Prisma.SortOrder
 }
 
@@ -451,7 +460,6 @@ export type VariantUncheckedUpdateManyWithoutProductNestedInput = {
 }
 
 export type VariantCreateWithoutPurchasesInput = {
-  id?: string
   sku: string
   name: string
   price: number
@@ -460,9 +468,9 @@ export type VariantCreateWithoutPurchasesInput = {
 }
 
 export type VariantUncheckedCreateWithoutPurchasesInput = {
-  id?: string
+  id?: number
   sku: string
-  productId: string
+  productId: number
   name: string
   price: number
   description?: string | null
@@ -485,7 +493,6 @@ export type VariantUpdateToOneWithWhereWithoutPurchasesInput = {
 }
 
 export type VariantUpdateWithoutPurchasesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -494,16 +501,15 @@ export type VariantUpdateWithoutPurchasesInput = {
 }
 
 export type VariantUncheckedUpdateWithoutPurchasesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   sku?: Prisma.StringFieldUpdateOperationsInput | string
-  productId?: Prisma.StringFieldUpdateOperationsInput | string
+  productId?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type VariantCreateWithoutProductInput = {
-  id?: string
   sku: string
   name: string
   price: number
@@ -512,7 +518,7 @@ export type VariantCreateWithoutProductInput = {
 }
 
 export type VariantUncheckedCreateWithoutProductInput = {
-  id?: string
+  id?: number
   sku: string
   name: string
   price: number
@@ -550,16 +556,16 @@ export type VariantScalarWhereInput = {
   AND?: Prisma.VariantScalarWhereInput | Prisma.VariantScalarWhereInput[]
   OR?: Prisma.VariantScalarWhereInput[]
   NOT?: Prisma.VariantScalarWhereInput | Prisma.VariantScalarWhereInput[]
-  id?: Prisma.StringFilter<"Variant"> | string
+  id?: Prisma.IntFilter<"Variant"> | number
   sku?: Prisma.StringFilter<"Variant"> | string
-  productId?: Prisma.StringFilter<"Variant"> | string
+  productId?: Prisma.IntFilter<"Variant"> | number
   name?: Prisma.StringFilter<"Variant"> | string
   price?: Prisma.FloatFilter<"Variant"> | number
   description?: Prisma.StringNullableFilter<"Variant"> | string | null
 }
 
 export type VariantCreateManyProductInput = {
-  id?: string
+  id?: number
   sku: string
   name: string
   price: number
@@ -567,7 +573,6 @@ export type VariantCreateManyProductInput = {
 }
 
 export type VariantUpdateWithoutProductInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -576,7 +581,7 @@ export type VariantUpdateWithoutProductInput = {
 }
 
 export type VariantUncheckedUpdateWithoutProductInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -585,7 +590,7 @@ export type VariantUncheckedUpdateWithoutProductInput = {
 }
 
 export type VariantUncheckedUpdateManyWithoutProductInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   sku?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -684,9 +689,9 @@ export type $VariantPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     purchases: Prisma.$PurchasePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    id: number
     sku: string
-    productId: string
+    productId: number
     name: string
     price: number
     description: string | null
@@ -1115,9 +1120,9 @@ export interface Prisma__VariantClient<T, Null = never, ExtArgs extends runtime.
  * Fields of the Variant model
  */
 export interface VariantFieldRefs {
-  readonly id: Prisma.FieldRef<"Variant", 'String'>
+  readonly id: Prisma.FieldRef<"Variant", 'Int'>
   readonly sku: Prisma.FieldRef<"Variant", 'String'>
-  readonly productId: Prisma.FieldRef<"Variant", 'String'>
+  readonly productId: Prisma.FieldRef<"Variant", 'Int'>
   readonly name: Prisma.FieldRef<"Variant", 'String'>
   readonly price: Prisma.FieldRef<"Variant", 'Float'>
   readonly description: Prisma.FieldRef<"Variant", 'String'>

@@ -4,8 +4,9 @@ import { Panel } from "@/components/common/Panel";
 import { PropsWithClassName } from "@/lib/types";
 import { Categories } from "../Categories";
 import { ProductsSort } from "../ProductsSort";
+import { Category } from "@/app/generated/prisma-client/client";
 
-export const FilterBar = ({ className }: PropsWithClassName) => {
+export const FilterBar = ({ className, categories }: FilterBarProps) => {
   return (
     <div
       className={cn(
@@ -14,9 +15,13 @@ export const FilterBar = ({ className }: PropsWithClassName) => {
       )}
     >
       <Panel className="flex items-center justify-between">
-        <Categories />
+        <Categories categories={categories} />
         <ProductsSort />
       </Panel>
     </div>
   );
 };
+
+export interface FilterBarProps extends PropsWithClassName {
+  categories: Category[];
+}

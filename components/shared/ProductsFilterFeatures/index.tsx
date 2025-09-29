@@ -1,21 +1,20 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { ComponentProps, useMemo } from "react";
 import { CheckboxGroup } from "@/components/common/CheckboxGroup";
-import { useFeaturesOptions } from "./useFeaturesOptions";
 
 const FEATURES_DEFAULT_LIMIT = 5;
 
 const ProductsFilterFeatures = ({
   value,
   onChange,
+  items,
+  isLoading,
   limit = FEATURES_DEFAULT_LIMIT,
 }: ProductsFilterFeaturesProps) => {
-  const { features, isLoading } = useFeaturesOptions();
-
   const defaultItems = useMemo(
-    () => features.slice(0, FEATURES_DEFAULT_LIMIT),
-    [features]
+    () => items.slice(0, FEATURES_DEFAULT_LIMIT),
+    [items]
   );
 
   return (
@@ -23,7 +22,7 @@ const ProductsFilterFeatures = ({
       title="Properties"
       className="mt-3"
       limit={limit}
-      items={features}
+      items={items}
       defaultItems={defaultItems}
       isLoading={isLoading}
       onChange={onChange}
@@ -34,8 +33,11 @@ const ProductsFilterFeatures = ({
 
 export default ProductsFilterFeatures;
 
-type ProductsFilterFeaturesProps = {
-  value: string[];
+type ProductsFilterFeaturesProps = Pick<
+  ComponentProps<typeof CheckboxGroup>,
+  "items" | "value" | "onChange"
+> & {
   onChange: (value: string[]) => void;
   limit?: number;
+  isLoading: boolean;
 };

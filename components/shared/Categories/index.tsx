@@ -1,23 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
 import { useStoreCategory } from "@/store/category";
 import { PropsWithClassName } from "@/lib/types";
-import { CategoryModel } from "@/app/generated/prisma-client/models";
-import { serviceCategories } from "@/services/serviceCategories";
+import { Category } from "@/app/generated/prisma-client/client";
 
-export const Categories = ({ className }: PropsWithClassName) => {
+export const Categories = ({ className, categories }: CategoriesProps) => {
   const activeCategoryId = useStoreCategory((state) => state.activeId);
-
-  const [categories, setCategories] = useState<CategoryModel[]>([]);
-
-  useEffect(() => {
-    serviceCategories
-      .getAll()
-      .then(setCategories)
-      .catch(() => setCategories([]));
-  }, []);
 
   const handleOnScrollTo: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
     e.preventDefault();
@@ -58,3 +48,7 @@ export const Categories = ({ className }: PropsWithClassName) => {
     </div>
   );
 };
+
+export interface CategoriesProps extends PropsWithClassName {
+  categories: Category[];
+}
