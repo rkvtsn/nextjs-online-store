@@ -11,18 +11,21 @@ export const dynamic = "force-dynamic";
 
 export default async function Home({ searchParams }: HomeProps) {
   let categories: Awaited<TReturnGetCategoriesWithProducts> = [];
-
+  let productsCount = 0;
   try {
     categories = await getCategoriesWithProducts(searchParams);
+    productsCount = categories.filter(
+      ({ product }) => !!product?.length
+    ).length;
   } catch (e) {
     console.error("Home page: error fetching categories:", e);
   }
 
   return (
     <>
-      <Panel className="mt-10 pr-10 pl-10">
+      <Panel className="mt-3 pr-10 pl-10">
         <Heading size="lg" className="font-extrabold">
-          All products
+          Catalog
         </Heading>
         <FilterBar categories={categories} />
 
@@ -34,11 +37,12 @@ export default async function Home({ searchParams }: HomeProps) {
 
             <div className="flex-1">
               <div className="flex flex-col gap-5">
-                {categories.filter(({ product }) => !!product?.length)
-                  .length === 0 ? (
-                  <div className="empty-state">
-                    <h2 className="empty-state__title">No categories found</h2>
-                    <p className="empty-state__text">
+                {productsCount === 0 ? (
+                  <div className="flex flex-col items-center justify-center py-12">
+                    <h2 className="text-2xl font-semibold mb-2 text-gray-800">
+                      No categories found
+                    </h2>
+                    <p className="text-gray-500 text-center">
                       We couldn’t find any categories matching your filters.
                     </p>
                   </div>

@@ -2,7 +2,7 @@ import { TPriceState, TProductsFilter } from "./types";
 
 export const RANGE_MIN = 0;
 
-export const RANGE_MAX = 200;
+export const RANGE_MAX = 50;
 
 export const PRICE_STATE_DEFAULT: TPriceState = {
   from: RANGE_MIN,

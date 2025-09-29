@@ -1,11 +1,13 @@
+import { PropsWithClassName } from "@/lib/types";
+import { cx } from "class-variance-authority";
 import Image from "next/image";
 
-const ProductImage = ({ imageUrl, name }: ProductImageProps) => {
+const ProductImage = ({ imageUrl, name, className }: ProductImageProps) => {
   return (
     <Image
       src={`/images/products${imageUrl}` || "default_product.png"}
       alt={name}
-      className="object-cover"
+      className={cx("object-cover", className)}
       fill
       priority
     />
@@ -14,7 +16,7 @@ const ProductImage = ({ imageUrl, name }: ProductImageProps) => {
 
 export default ProductImage;
 
-interface ProductImageProps {
+type ProductImageProps = PropsWithClassName & {
   imageUrl: string | undefined | null;
   name: string;
-}
+};

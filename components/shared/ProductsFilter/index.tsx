@@ -19,12 +19,13 @@ import {
   RANGE_MIN,
 } from "@/lib/constants";
 
-export const ProductsFilter = ({ className }: PropsWithClassName) => {
+export const ProductsFilter = ({ className }: ProductFilterProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [state, setState] = useState<TProductsFilter>(() =>
     parseQueryToFilterState(searchParams.toString())
   );
+  const [isLoading, setIsLoading] = useState(false);
 
   const onChangeState = useCallback(
     <K extends keyof TProductsFilter>(name: K) =>
@@ -34,6 +35,7 @@ export const ProductsFilter = ({ className }: PropsWithClassName) => {
           newValue.isDirty = getIsDirtyFilter(newValue);
           return newValue;
         });
+        setIsLoading(true);
       },
     []
   );
@@ -42,6 +44,7 @@ export const ProductsFilter = ({ className }: PropsWithClassName) => {
     const queryString = parseQueryFromFilterState(state);
     if (queryString !== searchParams.toString()) {
       router.replace(`?${queryString}`, { scroll: false });
+      setIsLoading(false);
     }
   }, 300);
 
@@ -66,7 +69,7 @@ export const ProductsFilter = ({ className }: PropsWithClassName) => {
         <Heading size="sm" className="font-bold">
           Filters
         </Heading>
-        {state.isDirty && (
+        {state.isDirty && !isLoading && (
           <button
             onClick={handleOnClear}
             className="text-xs text-primary hover:text-primary/70 transition-colors border-b-2 border-dotted border-black cursor-pointer"
@@ -103,3 +106,5 @@ export const ProductsFilter = ({ className }: PropsWithClassName) => {
     </div>
   );
 };
+
+type ProductFilterProps = PropsWithClassName & {};
