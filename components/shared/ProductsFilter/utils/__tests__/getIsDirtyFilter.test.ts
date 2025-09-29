@@ -1,5 +1,6 @@
+import { PRODUCTS_FILTER_STATE_DEFAULT } from "@/lib/constants";
 import { getIsDirtyFilter } from "../getIsDirtyFilter";
-import { TProductsFilter, PRODUCTS_FILTER_STATE_DEFAULT } from "../../state";
+import { TProductsFilter } from "@/lib/types";
 
 describe("getIsDirtyFilter", () => {
   it("returns false for default state", () => {

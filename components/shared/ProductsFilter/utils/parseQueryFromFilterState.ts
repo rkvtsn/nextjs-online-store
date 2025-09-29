@@ -1,5 +1,5 @@
+import { TProductsFilter } from "@/lib/types";
 import QueryString from "qs";
-import { TProductsFilter } from "../state";
 
 export function parseQueryFromFilterState(state: TProductsFilter): string {
   const { isDirty, price, ...rest } = state;

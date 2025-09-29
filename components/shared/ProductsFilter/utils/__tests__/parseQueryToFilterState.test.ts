@@ -1,4 +1,4 @@
-import { PRODUCTS_FILTER_STATE_DEFAULT } from "../../state";
+import { PRODUCTS_FILTER_STATE_DEFAULT } from "@/lib/constants";
 import { parseQueryToFilterState } from "../parseQueryToFilterState";
 import QueryString from "qs";
 

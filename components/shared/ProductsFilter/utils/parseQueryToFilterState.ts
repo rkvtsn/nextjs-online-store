@@ -1,8 +1,9 @@
 import QueryString from "qs";
-import { TProductsFilter, PRODUCTS_FILTER_STATE_DEFAULT } from "../state";
 import { getIsDirtyFilter } from "./getIsDirtyFilter";
 import { toNumber } from "@/lib/utils/toNumber";
 import { toStringArray } from "@/lib/utils/toStringArray";
+import { TProductsFilter } from "@/lib/types";
+import { PRODUCTS_FILTER_STATE_DEFAULT } from "@/lib/constants";
 
 export function parseQueryToFilterState(query: string): TProductsFilter {
   if (!query || query === "null") {

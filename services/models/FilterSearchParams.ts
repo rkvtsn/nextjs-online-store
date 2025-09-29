@@ -1,4 +1,4 @@
-export interface FilterSearchParams {
+export interface TFilterSearchParams {
   price_from: number;
   price_to: number;
   features: string[];
@@ -6,7 +6,7 @@ export interface FilterSearchParams {
   sorted: string;
 }
 
-export enum FilterSearchSort {
+export enum EFilterSearchSort {
   ASC = "asc",
   DESC = "desc",
 }

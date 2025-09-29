@@ -2,16 +2,7 @@ import { Input } from "@/components/ui/input";
 import React, { ChangeEvent } from "react";
 import { RangeSlider } from "../RangeSlider";
 
-const INPUT_RANGE_MIN = 0;
-const INPUT_RANGE_MAX = 30000;
-
-const PriceRangeInput = ({
-  value,
-  onChange,
-  min = INPUT_RANGE_MIN,
-  max = INPUT_RANGE_MAX,
-}: InputRangeProps) => {
-
+const PriceRangeInput = ({ value, onChange, min, max }: InputRangeProps) => {
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const num = Number(e.target.value);
     const newValue = {
@@ -75,6 +66,6 @@ type InputRangeValue = {
 type InputRangeProps = {
   value: InputRangeValue;
   onChange?: (value: InputRangeValue) => void;
-  min?: number;
-  max?: number;
+  min: number;
+  max: number;
 };

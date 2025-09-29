@@ -1,6 +1,6 @@
+import { ComponentProps, useEffect, useState } from "react";
 import { CheckboxWithLabel } from "@/components/common/CheckboxWithLabel";
 import { serviceFeatures } from "@/services/serviceFeatures";
-import { ComponentProps, useEffect, useState } from "react";
 
 export const useFeaturesOptions = () => {
   const [features, setFeatures] = useState<
@@ -18,24 +18,23 @@ export const useFeaturesOptions = () => {
     serviceFeatures
       .getAll()
       .then((data) => {
-        setFeatures(
-          data
-            .filter(({ price }) => price !== null)
-            .map(({ name, id }) => ({
-              label: name,
-              value: `${id}`,
-              checked: false,
-            }))
-        );
-        setSpecialFeatures(
-          data
-            .filter(({ price }) => price === null)
-            .map(({ name, id }) => ({
-              label: name,
-              value: `${id}`,
-              checked: false,
-            }))
-        );
+        const basic = [];
+        const specials = [];
+        for (const feature of data) {
+          const featureOption = {
+            label: feature.name,
+            value: `${feature.id}`,
+            checked: false,
+          };
+          if (feature.price === null) {
+            specials.push(featureOption);
+          } else {
+            basic.push(featureOption);
+          }
+        }
+
+        setFeatures(basic);
+        setSpecialFeatures(specials);
       })
       .catch(() => {
         setFeatures([]);

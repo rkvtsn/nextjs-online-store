@@ -3,16 +3,14 @@ import { Panel } from "@/components/common/Panel";
 import { FilterBar } from "@/components/shared/FilterBar";
 import { ProductsGroup } from "@/components/shared/ProductsGroup";
 import { ProductsFilter } from "@/components/shared/ProductsFilter";
-import {
-  ReturnGetCategoriesWithProducts,
-  getCategoriesWithProducts,
-} from "@/services/server/getCategoriesWithProducts";
-import { FilterSearchParams } from "@/services/models/FilterSearchParams";
+import { getCategoriesWithProducts } from "@/services/server/getCategoriesWithProducts";
+import { TFilterSearchParams } from "@/services/models/FilterSearchParams";
+import { TReturnGetCategoriesWithProducts } from "@/services/server/types";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home({ searchParams }: HomeProps) {
-  let categories: Awaited<ReturnGetCategoriesWithProducts> = [];
+  let categories: Awaited<TReturnGetCategoriesWithProducts> = [];
 
   try {
     categories = await getCategoriesWithProducts(searchParams);
@@ -26,9 +24,7 @@ export default async function Home({ searchParams }: HomeProps) {
         <Heading size="lg" className="font-extrabold">
           All products
         </Heading>
-        <FilterBar
-          categories={categories.filter(({ product }) => !!product?.length)}
-        />
+        <FilterBar categories={categories} />
 
         <Panel className="mt-10 pb-14">
           <div className="gap-[60px] flex">
@@ -38,7 +34,8 @@ export default async function Home({ searchParams }: HomeProps) {
 
             <div className="flex-1">
               <div className="flex flex-col gap-5">
-                {categories.length === 0 ? (
+                {categories.filter(({ product }) => !!product?.length)
+                  .length === 0 ? (
                   <div className="empty-state">
                     <h2 className="empty-state__title">No categories found</h2>
                     <p className="empty-state__text">
@@ -64,5 +61,5 @@ export default async function Home({ searchParams }: HomeProps) {
 }
 
 type HomeProps = {
-  searchParams?: Promise<FilterSearchParams>;
+  searchParams?: Promise<TFilterSearchParams>;
 };

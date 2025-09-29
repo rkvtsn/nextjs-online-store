@@ -16,3 +16,15 @@ export type PageProps<
   params: Promise<TParams>;
   searchParams?: Promise<SParams>;
 };
+
+export type TPriceState = {
+  from: number;
+  to: number;
+};
+
+export type TProductsFilter = {
+  price: TPriceState;
+  features: string[];
+  filterNow: string[];
+  isDirty: boolean;
+};

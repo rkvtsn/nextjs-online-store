@@ -4,16 +4,20 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Heading } from "@/components/common/Heading";
-import { PropsWithClassName } from "@/lib/types";
+import { PropsWithClassName, TProductsFilter } from "@/lib/types";
 import PriceRangeInput from "@/components/common/PriceRangeInput";
 import ProductsFilterFeatures from "../ProductsFilterFeatures";
 import ProductsFilterNow from "../ProductsFilterNow";
-import { PRODUCTS_FILTER_STATE_DEFAULT, TProductsFilter } from "./state";
 import { useDebounce } from "@/lib/hooks/useDebounce";
 import { getIsDirtyFilter } from "./utils/getIsDirtyFilter";
 import { parseQueryToFilterState } from "./utils/parseQueryToFilterState";
 import { parseQueryFromFilterState } from "./utils/parseQueryFromFilterState";
 import { useFeaturesOptions } from "../ProductsFilterFeatures/useFeaturesOptions";
+import {
+  PRODUCTS_FILTER_STATE_DEFAULT,
+  RANGE_MAX,
+  RANGE_MIN,
+} from "@/lib/constants";
 
 export const ProductsFilter = ({ className }: PropsWithClassName) => {
   const router = useRouter();
@@ -55,7 +59,7 @@ export const ProductsFilter = ({ className }: PropsWithClassName) => {
     specialFeatures,
     isLoading: featuresIsLoading,
   } = useFeaturesOptions();
-  console.log({ specialFeatures });
+
   return (
     <div className={cn("side-filters", className)}>
       <div className="flex items-center justify-between mb-4">
@@ -85,6 +89,8 @@ export const ProductsFilter = ({ className }: PropsWithClassName) => {
         <PriceRangeInput
           value={state.price}
           onChange={onChangeState("price")}
+          min={RANGE_MIN}
+          max={RANGE_MAX}
         />
       </div>
 

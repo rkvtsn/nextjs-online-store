@@ -8,7 +8,7 @@ import useIntersection from "@/lib/hooks/useIntersection";
 import { ProductCard } from "../ProductCard";
 import { PropsWithClassName } from "@/lib/types";
 import { CategoryModel } from "@/app/generated/prisma-client/models";
-import { ReturnGetCategoriesWithProducts } from "@/services/server/getCategoriesWithProducts";
+import { TReturnGetCategoriesWithProducts } from "@/services/server/types";
 
 export const ProductsGroup = (props: ProductsGroupProps) => {
   const { products, className, classNameProducts, category } = props;
@@ -51,7 +51,7 @@ export const ProductsGroup = (props: ProductsGroupProps) => {
 };
 
 type ProductsGroupProps = PropsWithClassName & {
-  products: Awaited<ReturnGetCategoriesWithProducts>[number]["product"];
+  products: Awaited<TReturnGetCategoriesWithProducts>[number]["product"];
   category: CategoryModel;
   classNameProducts?: PropsWithClassName["className"];
 };

@@ -1,4 +1,5 @@
-import { PRODUCTS_FILTER_STATE_DEFAULT, TProductsFilter } from "../state";
+import { PRODUCTS_FILTER_STATE_DEFAULT } from "@/lib/constants";
+import { TProductsFilter } from "@/lib/types";
 
 export function getIsDirtyFilter(state: TProductsFilter): boolean {
   const { price, filterNow, features } = PRODUCTS_FILTER_STATE_DEFAULT;

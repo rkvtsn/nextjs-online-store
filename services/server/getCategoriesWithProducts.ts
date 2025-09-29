@@ -1,21 +1,13 @@
 import { prisma } from "@/lib/prisma";
 import {
-  FilterSearchParams,
-  FilterSearchSort,
+  TFilterSearchParams,
+  EFilterSearchSort,
 } from "../models/FilterSearchParams";
-import { PRODUCTS_FILTER_STATE_DEFAULT } from "@/components/shared/ProductsFilter/state";
 import { toNumberArraySearchParam } from "@/lib/utils/parseSearchParamArray";
-
-const FILTER_SEARCH_DEFAULT: FilterSearchParams = {
-  price_from: PRODUCTS_FILTER_STATE_DEFAULT.price.from,
-  price_to: PRODUCTS_FILTER_STATE_DEFAULT.price.to,
-  features: PRODUCTS_FILTER_STATE_DEFAULT.features,
-  filterNow: PRODUCTS_FILTER_STATE_DEFAULT.filterNow,
-  sorted: FilterSearchSort.ASC,
-};
+import { FILTER_SEARCH_DEFAULT } from "./constants";
 
 export const getCategoriesWithProducts = async (
-  searchParams: Promise<FilterSearchParams> | undefined
+  searchParams: Promise<TFilterSearchParams> | undefined
 ) => {
   const params =
     searchParams === undefined ? FILTER_SEARCH_DEFAULT : await searchParams;
@@ -33,7 +25,7 @@ export const getCategoriesWithProducts = async (
     include: {
       product: {
         orderBy: {
-          id: FilterSearchSort.DESC,
+          id: EFilterSearchSort.DESC,
         },
         where: {
           features: features?.length
@@ -64,7 +56,7 @@ export const getCategoriesWithProducts = async (
               },
             },
             orderBy: {
-              price: FilterSearchSort.ASC,
+              price: EFilterSearchSort.ASC,
             },
           },
         },
@@ -74,7 +66,3 @@ export const getCategoriesWithProducts = async (
 
   return categories;
 };
-
-export type ReturnGetCategoriesWithProducts = ReturnType<
-  typeof getCategoriesWithProducts
->;
