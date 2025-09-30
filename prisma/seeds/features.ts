@@ -3,37 +3,37 @@ import { FeatureModel } from "@/app/generated/prisma-client/models";
 const FEATURES_RAW = [
   {
     name: "Cheese",
-    imageUrl: "/products/others/cheese.png",
+    imageUrl: "/others/cheese.png",
     price: 2.2,
   },
   {
     name: "Tomato",
-    imageUrl: "/products/vegetables/tomato.png",
+    imageUrl: "/vegetables/tomato.png",
     price: 1.2,
   },
   {
     name: "Hazelnut",
-    imageUrl: "/products/others/hazelnut.png",
+    imageUrl: "/others/hazelnut.png",
     price: 1.6,
   },
   {
     name: "Avocado",
-    imageUrl: "/products/vegetables/avocado.png",
+    imageUrl: "/vegetables/avocado.png",
     price: 2.0,
   },
   {
     name: "Meat",
-    imageUrl: "/products/fish_meat/meat.png",
+    imageUrl: "/fish_meat/meat.png",
     price: 5.0,
   },
   {
     name: "Fish",
-    imageUrl: "/products/fish_meat/salmon2.png",
+    imageUrl: "/fish_meat/salmon2.png",
     price: 5.0,
   },
   {
     name: "Bread",
-    imageUrl: "/products/bread/bread.png",
+    imageUrl: "/bread/bread.png",
     price: 1.1,
   },
   {

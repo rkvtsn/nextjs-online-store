@@ -15,3 +15,5 @@ export const PRODUCTS_FILTER_STATE_DEFAULT: TProductsFilter = {
   price: PRICE_STATE_DEFAULT,
   isDirty: false,
 };
+
+export const PUBLIC_PRODUCTS = "/images/products";
